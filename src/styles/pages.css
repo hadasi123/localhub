@@ -1,0 +1,57 @@
+
+/* Home page specific styles */
+.home-page {
+  padding: var(--spacing-lg);
+}
+
+.weather-news-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.weather-container,
+.news-container {
+  min-height: 500px;
+}
+
+.features-section {
+  margin-top: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .weather-news-section {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .weather-container,
+  .news-container {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: var(--spacing-md);
+  }
+  
+  .weather-news-section {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+}
