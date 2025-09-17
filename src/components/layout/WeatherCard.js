@@ -13,8 +13,7 @@ const WeatherCard = () => {
     error, 
     refreshWeather, 
     getWeatherIcon, 
-    formatTemperature, 
-    getWeatherDescription 
+    formatTemperature
   } = useWeather();
 
   if (loading && !weather) {

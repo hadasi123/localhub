@@ -66,7 +66,6 @@ class WeatherService {
     const data = await response.json();
     
     // Extract today's weather data
-    const today = data.daily.time[0];
     const temperature = Math.round(data.daily.apparent_temperature_mean[0]);
     const maxTemp = Math.round(data.daily.temperature_2m_max[0]);
     const minTemp = Math.round(data.daily.temperature_2m_min[0]);
