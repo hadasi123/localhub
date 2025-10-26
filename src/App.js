@@ -4,9 +4,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/globals.css';
 import './styles/components.css';
+import './styles/rtl.css';
 
 // Pages
 import HomePage from './pages/HomePage';
+// During repair: use the fixed placeholder page to avoid import errors
 import LostAndFoundPage from './pages/lost-and-found/LostAndFoundPage';
 import CarpoolPage from './pages/carpool/CarpoolPage';
 import EducationPage from './pages/education/EducationPage';

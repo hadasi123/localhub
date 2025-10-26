@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigation } from '../../hooks/useNavigation';
+import { useI18n } from '../../i18n';
 
 const Header = () => {
   const { 
@@ -13,14 +14,17 @@ const Header = () => {
     closeMobileMenu 
   } = useNavigation();
 
+  const { t } = useI18n();
+
   return (
     <>
-      <header className="header" style={{direction:'rtl'}}>
-        <div className="container">
-          <div className="header-content" style={{direction:'rtl'}}>
+      <header className="header rtl">
+        <div className="container px-4">
+          <div className="header-content rtl">
             {/* Desktop Navigation */}
-            <nav className="nav">
-              {navigationItems.map((item) => (
+            <div className="logo">שכונת אריאל שרון</div>
+            <nav className="nav rtl">
+              {[...navigationItems].map((item) => (
                 <a
                   key={item.path}
                   href={item.path}
@@ -40,7 +44,7 @@ const Header = () => {
             <button style={{flex: 1}}
               className="mobile-nav-toggle"
               onClick={toggleMobileMenu}
-              aria-label="Toggle mobile menu"
+              aria-label={t('common.toggleMobileMenu', 'Toggle mobile menu')}
             >
               ☰
             </button>
@@ -49,13 +53,13 @@ const Header = () => {
       </header>
 
       {/* Mobile Navigation */}
-      <div style={{direction:'rtl'}} className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-nav-header">
+      <div className={`mobile-nav rtl ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="mobile-nav-header">
           <div className="logo">שכונת אריאל שרון</div>
           <button 
             className="mobile-nav-close"
             onClick={closeMobileMenu}
-            aria-label="Close mobile menu"
+            aria-label={t('common.closeMobileMenu', 'Close mobile menu')}
           >
             ×
           </button>

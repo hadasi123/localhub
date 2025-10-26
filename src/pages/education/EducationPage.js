@@ -5,9 +5,11 @@ import PageLayout from '../../components/layout/PageLayout';
 import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
+import { useI18n } from '../../i18n';
 
 const EducationPage = () => {
   const { items, loading, addItem } = useData('education');
+  const { t } = useI18n();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -58,25 +60,16 @@ const EducationPage = () => {
       subtitle="הכל על מסגרות חינוכיות ותרבותיות בשכונת אריאל שרון"
     >
       <div className="fade-in">
-        <div className="mb-6">
-          <Button 
-            onClick={() => setShowForm(!showForm)}
-            className="mb-4"
-          >
-            {showForm ? 'Cancel' : 'Add Course/Workshop'}
-          </Button>
-        </div>
-
         {showForm && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Add Educational Opportunity</CardTitle>
+              <CardTitle>{t('education.addOpportunity')}</CardTitle>
             </CardHeader>
             <CardBody>
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="form-group">
-                    <label className="form-label">Title</label>
+                    <label className="form-label">{t('education.form.title')}</label>
                     <input
                       type="text"
                       name="title"
@@ -88,7 +81,7 @@ const EducationPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Category</label>
+                    <label className="form-label">{t('education.category.label')}</label>
                     <select
                       name="category"
                       value={formData.category}
@@ -96,45 +89,45 @@ const EducationPage = () => {
                       className="form-input"
                       required
                     >
-                      <option value="">Select category</option>
-                      <option value="language">Language</option>
-                      <option value="technology">Technology</option>
-                      <option value="arts">Arts & Crafts</option>
-                      <option value="fitness">Fitness</option>
-                      <option value="cooking">Cooking</option>
-                      <option value="business">Business</option>
-                      <option value="other">Other</option>
+                      <option value="">{t('education.category.select')}</option>
+                      <option value="language">{t('education.category.language')}</option>
+                      <option value="technology">{t('education.category.technology')}</option>
+                      <option value="arts">{t('education.category.arts')}</option>
+                      <option value="fitness">{t('education.category.fitness')}</option>
+                      <option value="cooking">{t('education.category.cooking')}</option>
+                      <option value="business">{t('education.category.business')}</option>
+                      <option value="other">{t('education.category.other')}</option>
                     </select>
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Level</label>
+                    <label className="form-label">{t('education.level.label')}</label>
                     <select
                       name="level"
                       value={formData.level}
                       onChange={handleInputChange}
                       className="form-input"
                     >
-                      <option value="beginner">Beginner</option>
-                      <option value="intermediate">Intermediate</option>
-                      <option value="advanced">Advanced</option>
+                      <option value="beginner">{t('education.level.beginner')}</option>
+                      <option value="intermediate">{t('education.level.intermediate')}</option>
+                      <option value="advanced">{t('education.level.advanced')}</option>
                     </select>
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Duration</label>
+                    <label className="form-label">{t('education.duration.label')}</label>
                     <input
                       type="text"
                       name="duration"
                       value={formData.duration}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="e.g., 8 weeks, 2 hours"
+                      placeholder={t('education.duration.placeholder')}
                     />
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Instructor</label>
+                    <label className="form-label">{t('education.form.instructor')}</label>
                     <input
                       type="text"
                       name="instructor"
@@ -146,7 +139,7 @@ const EducationPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Price (₪)</label>
+                    <label className="form-label">{t('education.form.price')}</label>
                     <input
                       type="number"
                       name="price"
@@ -158,19 +151,19 @@ const EducationPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Schedule</label>
+                    <label className="form-label">{t('education.schedule.label')}</label>
                     <input
                       type="text"
                       name="schedule"
                       value={formData.schedule}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="e.g., Mondays 7-9 PM"
+                      placeholder={t('education.schedule.placeholder')}
                     />
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Location</label>
+                    <label className="form-label">{t('education.form.location')}</label>
                     <input
                       type="text"
                       name="location"
@@ -181,7 +174,7 @@ const EducationPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Contact</label>
+                    <label className="form-label">{t('education.form.contact')}</label>
                     <input
                       type="text"
                       name="contact"
@@ -194,7 +187,7 @@ const EducationPage = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label className="form-label">Description</label>
+                  <label className="form-label">{t('education.form.description')}</label>
                   <textarea
                     name="description"
                     value={formData.description}
@@ -205,13 +198,13 @@ const EducationPage = () => {
                 </div>
                 
                 <div className="flex gap-4">
-                  <Button type="submit">Add Course</Button>
+                  <Button type="submit">{t('education.buttons.add')}</Button>
                   <Button 
                     type="button" 
                     variant="secondary"
                     onClick={() => setShowForm(false)}
                   >
-                    Cancel
+                    {t('education.buttons.cancel')}
                   </Button>
                 </div>
               </form>
@@ -220,19 +213,19 @@ const EducationPage = () => {
         )}
 
         <div>
-          <h3 className="text-2xl font-semibold mb-6">Available Courses & Workshops</h3>
+          <h3 className="text-2xl font-semibold mb-6">{t('education.availableCourses')}</h3>
           
           {loading ? (
             <div className="text-center py-8">
               <div className="spinner mx-auto mb-4"></div>
-              <p>Loading courses...</p>
+              <p>{t('education.loadingCourses')}</p>
             </div>
           ) : items.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
-                <p className="text-grey-600">No courses available yet.</p>
+                <p className="text-grey-600">{t('education.noCourses')}</p>
                 <p className="text-sm text-grey-500 mt-2">
-                  Be the first to add a course or workshop!
+                  {t('education.beFirstCourse')}
                 </p>
               </CardBody>
             </Card>
@@ -254,16 +247,26 @@ const EducationPage = () => {
                   <CardBody>
                     <p className="text-grey-600 mb-3">{item.description}</p>
                     <div className="space-y-1 text-sm text-grey-500">
-                      <p><strong>Instructor:</strong> {item.instructor}</p>
-                      <p><strong>Duration:</strong> {item.duration}</p>
-                      <p><strong>Schedule:</strong> {item.schedule}</p>
-                      <p><strong>Location:</strong> {item.location}</p>
-                      <p><strong>Price:</strong> ₪{item.price}</p>
-                      <p><strong>Contact:</strong> {item.contact}</p>
+                      <p><strong>{t('education.form.instructor')}:</strong> {item.instructor}</p>
+                      <p><strong>{t('education.duration.label')}:</strong> {item.duration}</p>
+                      <p><strong>{t('education.schedule.label')}:</strong> {item.schedule}</p>
+                      <p><strong>{t('education.form.location')}:</strong> {item.location}</p>
+                      <p><strong>{t('education.form.price')}:</strong> ₪{item.price}</p>
+                      <p><strong>{t('education.form.contact')}:</strong> {item.contact}</p>
                     </div>
                   </CardBody>
                 </Card>
               ))}
+            </div>
+          )}
+          {!showForm && (
+            <div className="flex justify-center mt-8">
+              <Button 
+                onClick={() => setShowForm(true)}
+                className="w-full md:w-auto"
+              >
+                {t('education.addCourse')}
+              </Button>
             </div>
           )}
         </div>

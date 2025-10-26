@@ -12,9 +12,29 @@ export const useNavigation = () => {
   // Navigation items with icons
   const navigationItems = [
     {
-      path: '/',
-      label: 'ראשי',
-      icon: '🏠'
+      path: '/sell',
+      label: 'לוח מודעות',
+      icon: '💰'
+    },
+    {
+      path: '/phone-book',
+      label: 'ספר טלפונים',
+      icon: '📞'
+    },
+    {
+      path: '/business',
+      label: 'עסקים',
+      icon: '🏢'
+    },
+    {
+      path: '/education',
+      label: 'חינוך ותרבות',
+      icon: '📚'
+    },
+    {
+      path: '/carpool',
+      label: 'קארפול',
+      icon: '🚗'
     },
     {
       path: '/lost-and-found',
@@ -23,30 +43,9 @@ export const useNavigation = () => {
       iconType: 'image'
     },
     {
-      path: '/carpool',
-      label: 'קארפול',
-      icon: '🚗'
-    },
-
-    {
-      path: '/education',
-      label: 'חינוך ותרבות',
-      icon: '📚'
-    },
-    {
-      path: '/business',
-      label: 'עסקים',
-      icon: '🏢'
-    },
-    {
-      path: '/phone-book',
-      label: 'ספר טלפונים',
-      icon: '📞'
-    },
-    {
-      path: '/sell',
-      label: 'למכירה ולהשכרה',
-      icon: '💰'
+      path: '/',
+      label: 'ראשי',
+      icon: '🏠'
     }
   ];
 

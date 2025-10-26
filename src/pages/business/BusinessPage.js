@@ -5,6 +5,7 @@ import PageLayout from '../../components/layout/PageLayout';
 import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
+import { useI18n } from '../../i18n';
 
 const BusinessPage = () => {
   const { items, loading, addItem } = useData('business');
@@ -50,30 +51,23 @@ const BusinessPage = () => {
     }));
   };
 
+  const { t } = useI18n();
+
   return (
     <PageLayout 
-      title="עסקים ובעלי מקצוע בשכונה" 
+      title={t('business.title')}
     >
       <div className="fade-in">
-        <div className="mb-6">
-          <Button 
-            onClick={() => setShowForm(!showForm)}
-            className="mb-4"
-          >
-            {showForm ? 'Cancel' : 'Add Business'}
-          </Button>
-        </div>
-
         {showForm && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Add Local Business</CardTitle>
+              <CardTitle>{t('business.addBusiness')}</CardTitle>
             </CardHeader>
             <CardBody>
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="form-group">
-                    <label className="form-label">Business Name</label>
+                    <label className="form-label">{t('labels.businessName')}</label>
                     <input
                       type="text"
                       name="name"
@@ -85,7 +79,7 @@ const BusinessPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Category</label>
+                    <label className="form-label">{t('labels.category')}</label>
                     <select
                       name="category"
                       value={formData.category}
@@ -93,19 +87,19 @@ const BusinessPage = () => {
                       className="form-input"
                       required
                     >
-                      <option value="">Select category</option>
-                      <option value="restaurant">Restaurant</option>
-                      <option value="retail">Retail</option>
-                      <option value="services">Services</option>
-                      <option value="healthcare">Healthcare</option>
-                      <option value="automotive">Automotive</option>
-                      <option value="beauty">Beauty & Wellness</option>
-                      <option value="other">Other</option>
+                      <option value="">{t('common.selectCategory')}</option>
+                      <option value="restaurant">מסעדה</option>
+                      <option value="retail">קמעונאות</option>
+                      <option value="services">שירותים</option>
+                      <option value="healthcare">בריאות</option>
+                      <option value="automotive">רכב</option>
+                      <option value="beauty">יופי ורווחה</option>
+                      <option value="other">{t('common.other')}</option>
                     </select>
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Phone</label>
+                    <label className="form-label">{t('labels.phone')}</label>
                     <input
                       type="tel"
                       name="phone"
@@ -116,7 +110,7 @@ const BusinessPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Email</label>
+                    <label className="form-label">{t('labels.email')}</label>
                     <input
                       type="email"
                       name="email"
@@ -127,7 +121,7 @@ const BusinessPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Website</label>
+                    <label className="form-label">{t('labels.website')}</label>
                     <input
                       type="url"
                       name="website"
@@ -138,20 +132,20 @@ const BusinessPage = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label className="form-label">Hours</label>
+                    <label className="form-label">{t('labels.hours')}</label>
                     <input
                       type="text"
                       name="hours"
                       value={formData.hours}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="e.g., Mon-Fri 9AM-6PM"
+                      placeholder="לדוגמה: ב'-ו' 09:00-18:00"
                     />
                   </div>
                 </div>
                 
                 <div className="form-group">
-                  <label className="form-label">Address</label>
+                  <label className="form-label">{t('labels.address')}</label>
                   <input
                     type="text"
                     name="address"
@@ -162,7 +156,7 @@ const BusinessPage = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label className="form-label">Description</label>
+                  <label className="form-label">{t('labels.description')}</label>
                   <textarea
                     name="description"
                     value={formData.description}
@@ -173,24 +167,24 @@ const BusinessPage = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label className="form-label">Services</label>
+                  <label className="form-label">{t('labels.services')}</label>
                   <textarea
                     name="services"
                     value={formData.services}
                     onChange={handleInputChange}
                     className="form-input form-textarea"
-                    placeholder="List services offered"
+                    placeholder="פרט את השירותים המוצעים"
                   />
                 </div>
                 
                 <div className="flex gap-4">
-                  <Button type="submit">Add Business</Button>
+                  <Button type="submit">{t('business.addBusinessBtn')}</Button>
                   <Button 
                     type="button" 
                     variant="secondary"
                     onClick={() => setShowForm(false)}
                   >
-                    Cancel
+                    {t('common.cancel')}
                   </Button>
                 </div>
               </form>
@@ -199,19 +193,19 @@ const BusinessPage = () => {
         )}
 
         <div>
-          <h3 className="text-2xl font-semibold mb-6">Local Businesses</h3>
+          <h3 className="text-2xl font-semibold mb-6">{t('business.localBusinesses')}</h3>
           
           {loading ? (
             <div className="text-center py-8">
               <div className="spinner mx-auto mb-4"></div>
-              <p>Loading businesses...</p>
+              <p>{t('business.loadingBusinesses')}</p>
             </div>
           ) : items.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
-                <p className="text-grey-600">No businesses listed yet.</p>
+                <p className="text-grey-600">{t('business.noBusinesses')}</p>
                 <p className="text-sm text-grey-500 mt-2">
-                  Be the first to add a local business!
+                  {t('business.beFirstBusiness')}
                 </p>
               </CardBody>
             </Card>
@@ -238,6 +232,16 @@ const BusinessPage = () => {
                   </CardBody>
                 </Card>
               ))}
+            </div>
+          )}
+          {!showForm && (
+            <div className="flex justify-center mt-8">
+              <Button 
+                onClick={() => setShowForm(true)}
+                className="w-full md:w-auto"
+              >
+                {t('business.addBusinessBtn')}
+              </Button>
             </div>
           )}
         </div>

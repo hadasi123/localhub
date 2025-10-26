@@ -5,18 +5,11 @@ import Header from './Header';
 
 const PageLayout = ({ children, title, subtitle }) => {
   return (
-    <div className="min-h-screen bg-grey-light">
+    <div className="min-h-screen bg-grey-50" dir="rtl">
       <Header />
-      <main className="page">
-        <div className="container">
-          {(title || subtitle) && (
-            <div className="page-header">
-              {title && <h1 className="page-title">{title}</h1>}
-              {subtitle && <p className="page-subtitle">{subtitle}</p>}
-            </div>
-          )}
-          {children}
-        </div>
+      <main className="container mx-auto px-4 py-8">
+        {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
+        {children}
       </main>
     </div>
   );

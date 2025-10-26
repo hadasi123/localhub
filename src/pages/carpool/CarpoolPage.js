@@ -5,18 +5,15 @@ import PageLayout from '../../components/layout/PageLayout';
 import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
+import { useI18n } from '../../i18n';
 
 const CarpoolPage = () => {
   const { items, loading, addItem } = useData('carpool');
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    from: '',
     to: '',
     date: '',
     time: '',
-    seats: 1,
-    price: 0,
-    driver: '',
     contact: '',
     description: ''
   });
@@ -26,13 +23,9 @@ const CarpoolPage = () => {
     try {
       await addItem(formData);
       setFormData({
-        from: '',
         to: '',
         date: '',
         time: '',
-        seats: 1,
-        price: 0,
-        driver: '',
         contact: '',
         description: ''
       });
@@ -50,59 +43,38 @@ const CarpoolPage = () => {
     }));
   };
 
+  const { t } = useI18n();
+
   return (
     <PageLayout 
-      title="קארפול" 
-      subtitle="נסיעות שיתופיות אל ומחוץ לשכונה"
+      title={t('carpool.title') || 'קארפול'}
+      subtitle={t('carpool.subtitle') || 'נסיעות שיתופיות אל ומחוץ לשכונה'}
     >
       <div className="fade-in">
-        {/* Add Carpool Button */}
-        <div className="mb-6">
-          <Button 
-            onClick={() => setShowForm(!showForm)}
-            className="mb-4"
-          >
-            {showForm ? 'Cancel' : 'Offer/Request Ride'}
-          </Button>
-        </div>
-
         {/* Add Carpool Form */}
         {showForm && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Offer or Request a Ride</CardTitle>
+              <CardTitle>{t('carpool.offerRequest')}</CardTitle>
             </CardHeader>
             <CardBody>
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="form-group">
-                    <label className="form-label">From</label>
-                    <input
-                      type="text"
-                      name="from"
-                      value={formData.from}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      placeholder="Starting location"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">To</label>
+                    <label className="form-label">{t('labels.to') || 'To'}</label>
                     <input
                       type="text"
                       name="to"
                       value={formData.to}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="Destination"
+                      placeholder={t('carpool.placeholderTo') || 'Destination'}
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
-                    <label className="form-label">Date</label>
+                    <label className="form-label">{t('carpool.date')}</label>
                     <input
                       type="date"
                       name="date"
@@ -112,9 +84,9 @@ const CarpoolPage = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
-                    <label className="form-label">Time</label>
+                    <label className="form-label">{t('carpool.time')}</label>
                     <input
                       type="time"
                       name="time"
@@ -124,80 +96,41 @@ const CarpoolPage = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
-                    <label className="form-label">Available Seats</label>
-                    <input
-                      type="number"
-                      name="seats"
-                      value={formData.seats}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      min="1"
-                      max="8"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Price per Person (₪)</label>
-                    <input
-                      type="number"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      min="0"
-                      step="0.1"
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Driver Name</label>
-                    <input
-                      type="text"
-                      name="driver"
-                      value={formData.driver}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">Contact</label>
+                    <label className="form-label">{t('carpool.contactDetails')}</label>
                     <input
                       type="text"
                       name="contact"
                       value={formData.contact}
                       onChange={handleInputChange}
                       className="form-input"
-                      placeholder="Phone or email"
+                      placeholder={t('carpool.phone')}
                       required
                     />
                   </div>
                 </div>
-                
+
                 <div className="form-group">
-                  <label className="form-label">Additional Notes</label>
+                  <label className="form-label">{t('carpool.additionalNotes')}</label>
                   <textarea
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
                     className="form-input form-textarea"
-                    placeholder="Any additional information about the ride"
+                    placeholder={t('carpool.notesPlaceholder')}
                   />
                 </div>
-                
-                <div className="flex gap-4">
-                  <Button type="submit">Submit Ride</Button>
+
+                <div className="flex flex-col md:flex-row md:justify-end gap-4">
+                  <Button type="submit" className="w-full md:w-auto">{t('carpool.submitRide')}</Button>
                   <Button 
                     type="button" 
                     variant="secondary"
                     onClick={() => setShowForm(false)}
+                    className="w-full md:w-auto"
                   >
-                    Cancel
+                    {t('common.cancel')}
                   </Button>
                 </div>
               </form>
@@ -207,19 +140,19 @@ const CarpoolPage = () => {
 
         {/* Carpool List */}
         <div>
-          <h3 className="text-2xl font-semibold mb-6">Available Rides</h3>
+          <h3 className="text-2xl font-semibold mb-6">{t('carpool.availableRides')}</h3>
           
           {loading ? (
             <div className="text-center py-8">
               <div className="spinner mx-auto mb-4"></div>
-              <p>Loading rides...</p>
+              <p>{t('carpool.loadingRides')}</p>
             </div>
           ) : items.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
-                <p className="text-grey-600">No carpool rides available yet.</p>
+                <p className="text-grey-600">{t('carpool.noRides')}</p>
                 <p className="text-sm text-grey-500 mt-2">
-                  Be the first to offer a ride!
+                  {t('carpool.beFirstRide')}
                 </p>
               </CardBody>
             </Card>
@@ -229,16 +162,13 @@ const CarpoolPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <CardTitle className="text-lg">
-                      {item.from} → {item.to}
+                      {item.to}
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
                     <div className="space-y-2 mb-4">
-                      <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
-                      <p><strong>Time:</strong> {item.time}</p>
-                      <p><strong>Seats:</strong> {item.seats}</p>
-                      <p><strong>Price:</strong> ₪{item.price}</p>
-                      <p><strong>Driver:</strong> {item.driver}</p>
+                      <p><strong>{t('carpool.date')}:</strong> {new Date(item.date).toLocaleDateString('he-IL')}</p>
+                      <p><strong>{t('carpool.time')}:</strong> {item.time}</p>
                     </div>
                     
                     {item.description && (
@@ -246,11 +176,21 @@ const CarpoolPage = () => {
                     )}
                     
                     <div className="text-sm text-grey-500">
-                      <p><strong>Contact:</strong> {item.contact}</p>
+                      <p><strong>{t('carpool.contact')}:</strong> {item.contact}</p>
                     </div>
                   </CardBody>
                 </Card>
               ))}
+            </div>
+          )}
+          {!showForm && (
+            <div className="flex justify-center mt-8">
+              <Button 
+                onClick={() => setShowForm(true)}
+                className="w-full md:w-auto"
+              >
+                {t('carpool.offerRequest')}
+              </Button>
             </div>
           )}
         </div>
