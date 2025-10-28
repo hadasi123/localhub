@@ -62,15 +62,12 @@ export const createLostAndFoundItem = (data = {}) => ({
 // Carpool item structure
 export const createCarpoolItem = (data = {}) => ({
   id: data.id || '',
-  from: data.from || '',
   to: data.to || '',
-  date: data.date || new Date().toISOString(),
+  date: data.date || '',
   time: data.time || '',
-  seats: data.seats || 1,
-  price: data.price || 0,
-  driver: data.driver || '',
   contact: data.contact || '',
   description: data.description || '',
+  createdAt: data.createdAt || new Date().toISOString(),
   status: data.status || 'active'
 });
 

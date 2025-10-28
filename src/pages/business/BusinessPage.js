@@ -13,13 +13,10 @@ const BusinessPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    category: '',
     address: '',
     phone: '',
-    email: '',
     website: '',
-    hours: '',
-    services: ''
+    hours: ''
   });
 
   const handleSubmit = async (e) => {
@@ -29,13 +26,10 @@ const BusinessPage = () => {
       setFormData({
         name: '',
         description: '',
-        category: '',
         address: '',
         phone: '',
-        email: '',
         website: '',
-        hours: '',
-        services: ''
+        hours: ''
       });
       setShowForm(false);
     } catch (error) {
@@ -78,25 +72,6 @@ const BusinessPage = () => {
                     />
                   </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.category')}</label>
-                    <select
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                    >
-                      <option value="">{t('common.selectCategory')}</option>
-                      <option value="restaurant">מסעדה</option>
-                      <option value="retail">קמעונאות</option>
-                      <option value="services">שירותים</option>
-                      <option value="healthcare">בריאות</option>
-                      <option value="automotive">רכב</option>
-                      <option value="beauty">יופי ורווחה</option>
-                      <option value="other">{t('common.other')}</option>
-                    </select>
-                  </div>
                   
                   <div className="form-group">
                     <label className="form-label">{t('labels.phone')}</label>
@@ -109,16 +84,6 @@ const BusinessPage = () => {
                     />
                   </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.email')}</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="form-input"
-                    />
-                  </div>
                   
                   <div className="form-group">
                     <label className="form-label">{t('labels.website')}</label>
@@ -166,16 +131,6 @@ const BusinessPage = () => {
                   />
                 </div>
                 
-                <div className="form-group">
-                  <label className="form-label">{t('labels.services')}</label>
-                  <textarea
-                    name="services"
-                    value={formData.services}
-                    onChange={handleInputChange}
-                    className="form-input form-textarea"
-                    placeholder="פרט את השירותים המוצעים"
-                  />
-                </div>
                 
                 <div className="flex gap-4">
                   <Button type="submit">{t('business.addBusinessBtn')}</Button>
@@ -215,19 +170,14 @@ const BusinessPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <CardTitle className="text-lg">{item.name}</CardTitle>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                      {item.category}
-                    </span>
                   </CardHeader>
                   <CardBody>
                     <p className="text-grey-600 mb-3">{item.description}</p>
                     <div className="space-y-1 text-sm text-grey-500">
-                      {item.address && <p><strong>Address:</strong> {item.address}</p>}
-                      {item.phone && <p><strong>Phone:</strong> {item.phone}</p>}
-                      {item.email && <p><strong>Email:</strong> {item.email}</p>}
-                      {item.website && <p><strong>Website:</strong> <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.website}</a></p>}
-                      {item.hours && <p><strong>Hours:</strong> {item.hours}</p>}
-                      {item.services && <p><strong>Services:</strong> {item.services}</p>}
+                      {item.address && <p><strong>{t('business.fields.address')}:</strong> {item.address}</p>}
+                      {item.phone && <p><strong>{t('business.fields.phone')}:</strong> {item.phone}</p>}
+                      {item.website && <p><strong>{t('business.fields.website')}:</strong> <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.website}</a></p>}
+                      {item.hours && <p><strong>{t('business.fields.hours')}:</strong> {item.hours}</p>}
                     </div>
                   </CardBody>
                 </Card>

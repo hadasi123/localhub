@@ -14,11 +14,7 @@ const PhoneBookPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
-    address: '',
-    category: '',
-    description: '',
-    emergency: false
+    description: ''
   });
 
   const handleSubmit = async (e) => {
@@ -28,11 +24,7 @@ const PhoneBookPage = () => {
       setFormData({
         name: '',
         phone: '',
-        email: '',
-        address: '',
-        category: '',
-        description: '',
-        emergency: false
+        description: ''
       });
       setShowForm(false);
     } catch (error) {
@@ -85,57 +77,7 @@ const PhoneBookPage = () => {
                     />
                   </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('phoneBook.form.email')}</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="form-input"
-                    />
-                  </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('phoneBook.form.category')}</label>
-                    <select
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                    >
-                      <option value="">{t('phoneBook.form.selectCategory')}</option>
-                      <option value="emergency">{t('phoneBook.categories.emergency')}</option>
-                      <option value="healthcare">{t('phoneBook.categories.healthcare')}</option>
-                      <option value="government">{t('phoneBook.categories.government')}</option>
-                      <option value="utilities">{t('phoneBook.categories.utilities')}</option>
-                      <option value="business">{t('phoneBook.categories.business')}</option>
-                      <option value="personal">{t('phoneBook.categories.personal')}</option>
-                    </select>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">{t('phoneBook.form.address')}</label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      className="form-input"
-                    />
-                  </div>
-                  
-                  <div className="form-group flex items-center">
-                    <input
-                      type="checkbox"
-                      name="emergency"
-                      checked={formData.emergency}
-                      onChange={handleInputChange}
-                      className="mr-2"
-                    />
-                    <label className="form-label mb-0">{t('phoneBook.form.emergency')}</label>
-                  </div>
                 </div>
                 
                 <div className="form-group">
@@ -184,25 +126,13 @@ const PhoneBookPage = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((item) => (
-                <Card key={item.id} className={item.emergency ? 'border-red-200 bg-red-50' : ''}>
+                <Card key={item.id}>
                   <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{item.name}</CardTitle>
-                      {item.emergency && (
-                        <span className="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
-                          {t('phoneBook.labels.emergency')}
-                        </span>
-                      )}
-                    </div>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                      {t(`phoneBook.categories.${item.category}`)}
-                    </span>
+                    <CardTitle className="text-lg">{item.name}</CardTitle>
                   </CardHeader>
                   <CardBody>
                     <div className="space-y-2">
                       <p><strong>{t('phoneBook.labels.phone')}:</strong> <a href={`tel:${item.phone}`} className="text-primary hover:underline">{item.phone}</a></p>
-                      {item.email && <p><strong>{t('phoneBook.labels.email')}:</strong> <a href={`mailto:${item.email}`} className="text-primary hover:underline">{item.email}</a></p>}
-                      {item.address && <p><strong>{t('phoneBook.labels.address')}:</strong> {item.address}</p>}
                       {item.description && <p className="text-grey-600">{item.description}</p>}
                     </div>
                   </CardBody>

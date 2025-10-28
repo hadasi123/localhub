@@ -12,14 +12,11 @@ const SellPage = () => {
   const { t } = useI18n();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
     description: '',
     price: 0,
     category: '',
-    condition: 'good',
-    seller: '',
     contact: '',
-    location: ''
+    condition: 'good'
   });
 
   const handleSubmit = async (e) => {
@@ -27,14 +24,11 @@ const SellPage = () => {
     try {
       await addItem(formData);
       setFormData({
-        title: '',
         description: '',
         price: 0,
         category: '',
-        condition: 'good',
-        seller: '',
         contact: '',
-        location: ''
+        condition: 'good'
       });
       setShowForm(false);
     } catch (error) {
@@ -50,16 +44,7 @@ const SellPage = () => {
     }));
   };
 
-  const getConditionColor = (condition) => {
-    const colors = {
-      new: 'bg-green-100 text-green-800',
-      'like-new': 'bg-blue-100 text-blue-800',
-      good: 'bg-yellow-100 text-yellow-800',
-      fair: 'bg-orange-100 text-orange-800',
-      poor: 'bg-red-100 text-red-800'
-    };
-    return colors[condition] || colors.good;
-  };
+  
 
   return (
     <PageLayout 
@@ -74,17 +59,6 @@ const SellPage = () => {
             <CardBody>
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.title')}</label>
-                    <input
-                      type="text"
-                      name="title"
-                      value={formData.title}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                    />
-                  </div>
                   
                   <div className="form-group">
                     <label className="form-label">{t('labels.category')}</label>
@@ -96,59 +70,46 @@ const SellPage = () => {
                       required
                     >
                       <option value="">{t('common.selectCategory')}</option>
-                      <option value="electronics">{t('sell.categories.electronics')}</option>
-                      <option value="furniture">{t('sell.categories.furniture')}</option>
-                      <option value="clothing">{t('sell.categories.clothing')}</option>
-                      <option value="books">{t('sell.categories.books')}</option>
-                      <option value="vehicles">{t('sell.categories.vehicles')}</option>
-                      <option value="home">{t('sell.categories.home')}</option>
-                      <option value="sports">{t('sell.categories.sports')}</option>
-                      <option value="toys">{t('sell.categories.toys')}</option>
-                      <option value="other">{t('sell.categories.other')}</option>
+                      <option value="sale">{t('sell.category.sale')}</option>
+                      <option value="giveaway">{t('sell.category.giveaway')}</option>
+                      <option value="rent">{t('sell.category.rent')}</option>
                     </select>
                   </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.price')} (₪)</label>
-                    <input
-                      type="number"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      min="0"
-                      step="0.1"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.condition')}</label>
-                    <select
-                      name="condition"
-                      value={formData.condition}
-                      onChange={handleInputChange}
-                      className="form-input"
-                    >
-                      <option value="new">{t('sell.conditions.new')}</option>
-                      <option value="like-new">{t('sell.conditions.like-new')}</option>
-                      <option value="good">{t('sell.conditions.good')}</option>
-                      <option value="fair">{t('sell.conditions.fair')}</option>
-                      <option value="poor">{t('sell.conditions.poor')}</option>
-                    </select>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.seller')}</label>
-                    <input
-                      type="text"
-                      name="seller"
-                      value={formData.seller}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      required
-                    />
-                  </div>
+                  {formData.category !== 'giveaway' && (
+                    <div className="form-group">
+                      <label className="form-label">{t('labels.price')} (₪)</label>
+                      <input
+                        type="number"
+                        name="price"
+                        value={formData.price}
+                        onChange={handleInputChange}
+                        className="form-input"
+                        min="0"
+                        step="0.1"
+                        required
+                      />
+                    </div>
+                  )}
+
+                  {formData.category === 'giveaway' && (
+                    <div className="form-group">
+                      <label className="form-label">{t('sell.fields.itemCondition')}</label>
+                      <select
+                        name="condition"
+                        value={formData.condition}
+                        onChange={handleInputChange}
+                        className="form-input"
+                        required
+                      >
+                        <option value="new">{t('sell.conditions.new')}</option>
+                        <option value="like-new">{t('sell.conditions.like-new')}</option>
+                        <option value="good">{t('sell.conditions.good')}</option>
+                        <option value="fair">{t('sell.conditions.fair')}</option>
+                        <option value="poor">{t('sell.conditions.poor')}</option>
+                      </select>
+                    </div>
+                  )}
                   
                   <div className="form-group">
                     <label className="form-label">{t('labels.contact')}</label>
@@ -163,17 +124,6 @@ const SellPage = () => {
                     />
                   </div>
                   
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.location')}</label>
-                    <input
-                      type="text"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleInputChange}
-                      className="form-input"
-                      placeholder={t('labels.location')}
-                    />
-                  </div>
                 </div>
                 
                 <div className="form-group">
@@ -226,25 +176,26 @@ const SellPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{item.title}</CardTitle>
                       <div className="text-right">
-                        <div className="text-xl font-bold text-primary">₪{item.price}</div>
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${getConditionColor(item.condition)}`}>
-                          {t(`sell.conditions.${item.condition}`) || item.condition}
-                        </span>
+                        {item.category !== 'giveaway' && (
+                          <div className="text-xl font-bold text-primary">₪{item.price}</div>
+                        )}
+                        {item.category === 'giveaway' && (
+                          <div className="text-sm text-gray-600">
+                            {t('sell.fields.condition')}: {t(`sell.conditions.${item.condition}`)}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                      {t(`sell.categories.${item.category}`) || item.category}
+                      {t(`sell.category.${item.category}`)}
                     </span>
                   </CardHeader>
                   <CardBody>
                     <p className="text-grey-600 mb-3">{item.description}</p>
                     <div className="space-y-1 text-sm text-grey-500">
-                      <p><strong>Seller:</strong> {item.seller}</p>
-                      <p><strong>Contact:</strong> {item.contact}</p>
-                      {item.location && <p><strong>Location:</strong> {item.location}</p>}
-                      <p><strong>Listed:</strong> {new Date(item.date).toLocaleDateString()}</p>
+                      <p><strong>{t('sell.fields.contact')}:</strong> {item.contact}</p>
+                      <p><strong>{t('sell.fields.listed')}:</strong> {new Date(item.date).toLocaleDateString()}</p>
                     </div>
                   </CardBody>
                 </Card>

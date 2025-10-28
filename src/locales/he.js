@@ -29,7 +29,13 @@ const he = {
     localBusinesses: '',
     loadingBusinesses: 'טוען עסקים...',
     noBusinesses: 'אין עסקים רשומים עדיין.',
-    beFirstBusiness: 'היה הראשון להוסיף עסק מקומי!'
+    beFirstBusiness: 'היה הראשון להוסיף עסק מקומי!',
+    fields: {
+      address: 'כתובת',
+      phone: 'טלפון',
+      website: 'אתר אינטרנט',
+      hours: 'שעות פעילות'
+    }
   },
   sell: {
     title: 'לוח מודעות',
@@ -38,8 +44,20 @@ const he = {
     itemsForSale: 'פרסום מודעות מכירה, מסירה והשכרה בשכונת אריאל שרון',
     loadingItems: 'טוען פריטים...',
     noItemsForSale: 'אין פריטים למכירה, מסירה או השכרה עדיין.',
-    beFirstList: 'היה הראשון לפרסם פריט!'
-    ,
+    beFirstList: 'היה הראשון לפרסם פריט!',
+    fields: {
+      contact: 'איש קשר',
+      price: 'מחיר',
+      condition: 'מצב',
+      listed: 'פורסם',
+      description: 'תיאור',
+      itemCondition: 'מצב הפריט'
+    },
+    category: {
+      sale: 'למכירה',
+      giveaway: 'למסירה',
+      rent: 'להשכרה'
+    },
     categories: {
       electronics: 'אלקטרוניקה',
       furniture: 'ריהוט',
