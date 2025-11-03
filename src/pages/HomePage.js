@@ -3,7 +3,7 @@
 import React from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import WeatherCard from '../components/layout/WeatherCard';
-import NewsFeed from '../components/layout/NewsFeed';
+import AirPollutionCard from '../components/layout/AirPollutionCard';
 import FeatureGrid from '../components/layout/FeatureGrid';
 
 const HomePage = () => {
@@ -14,9 +14,8 @@ const HomePage = () => {
         <div className="weather-news-section mb-8">
           <div className="weather-container">
             <WeatherCard />
-          </div>
-          <div className="news-container">
-            <NewsFeed />
+            <AirPollutionCard />
+            
           </div>
         </div>
 

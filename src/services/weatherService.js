@@ -154,6 +154,30 @@ class WeatherService {
   }
 }
 
+// Air Pollution API (Open-Meteo)
+WeatherService.prototype.getAirPollution = async function(lat = 32.060809, lon = 34.839409) {
+  const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone,sulphur_dioxide&timezone=Asia/Jerusalem`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Air pollution API error');
+    const data = await response.json();
+    // Get latest hour's values
+    const lastIdx = data.hourly.time.length - 1;
+    return {
+      pm10: data.hourly.pm10[lastIdx],
+      pm2_5: data.hourly.pm2_5[lastIdx],
+      co: data.hourly.carbon_monoxide[lastIdx],
+      no2: data.hourly.nitrogen_dioxide[lastIdx],
+      o3: data.hourly.ozone[lastIdx],
+      so2: data.hourly.sulphur_dioxide[lastIdx],
+      time: data.hourly.time[lastIdx]
+    };
+  } catch (e) {
+    console.error('Error fetching air pollution:', e);
+    return null;
+  }
+};
+
 // Create singleton instance
 const weatherService = new WeatherService();
 

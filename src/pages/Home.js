@@ -2,7 +2,6 @@
 
 import React from 'react';
 import WeatherCard from '../components/layout/WeatherCard';
-import NewsFeed from '../components/layout/NewsFeed';
 import FeatureGrid from '../components/layout/FeatureGrid';
 import '../styles/pages.css';
 
@@ -14,9 +13,9 @@ const Home = () => {
         <div className="weather-container">
           <WeatherCard />
         </div>
-        <div className="news-container">
-          <NewsFeed />
-        </div>
+          {/* <div className="news-container">
+            <NewsFeed />
+          </div> */}
       </div>
       
       {/* Community Features Section */}
