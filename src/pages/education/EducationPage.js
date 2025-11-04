@@ -260,7 +260,7 @@ const EducationPage = () => {
             </div>
           )}
           {!showForm && (
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-8" style={{ marginBottom: '24px' }}>
               <Button 
                 onClick={() => setShowForm(true)}
                 className="w-full md:w-auto"
@@ -269,6 +269,30 @@ const EducationPage = () => {
               </Button>
             </div>
           )}
+        </div>
+
+        {/* Divider */}
+        <div style={{ borderTop: '2px solid #e5e7eb', marginTop: '32px', marginBottom: '24px' }}></div>
+
+        {/* Events iframe card */}
+        <div>
+          <Card>
+            <CardHeader>
+              <CardTitle>כל אירועי התרבות והספורט בקריית אונו</CardTitle>
+            </CardHeader>
+            <CardBody style={{ padding: 0, height: '600px' }}>
+              <iframe
+                src="https://www.kiryatono.muni.il/events/?category=0&daterange=3months"
+                title="אירועי תרבות וספורט בקריית אונו"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none'
+                }}
+                loading="lazy"
+              />
+            </CardBody>
+          </Card>
         </div>
       </div>
     </PageLayout>
