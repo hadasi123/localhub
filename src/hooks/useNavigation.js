@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import lostAndFoundIcon from '../assets/icons/lost_and_found.png';
+import sellIcon from '../assets/icons/icons/sell.svg';
+import phoneBookIcon from '../assets/icons/icons/phonebook.svg';
+import businessIcon from '../assets/icons/icons/bussinesses.svg';
+import educationIcon from '../assets/icons/icons/education.svg';
+import carpoolIcon from '../assets/icons/icons/carpool.svg';
+import lostFoundIcon from '../assets/icons/icons/lost-found.svg';
 
 export const useNavigation = () => {
   const location = useLocation();
@@ -14,33 +19,39 @@ export const useNavigation = () => {
     {
       path: '/sell',
       label: 'לוח מודעות',
-      icon: '💰'
+      icon: sellIcon,
+      iconType: 'svg'
+    
     },
     {
       path: '/phone-book',
       label: 'ספר טלפונים',
-      icon: '📞'
+      icon: phoneBookIcon,
+      iconType: 'svg'
     },
     {
       path: '/business',
       label: 'עסקים',
-      icon: '🏢'
+      icon: businessIcon,
+      iconType: 'svg'
     },
     {
       path: '/education',
       label: 'חינוך ותרבות',
-      icon: '📚'
+      icon: educationIcon,
+      iconType: 'svg'
     },
     {
       path: '/carpool',
       label: 'קארפול',
-      icon: '🚗'
+      icon: carpoolIcon,
+      iconType: 'svg'
     },
     {
       path: '/lost-and-found',
-      label: 'אבידות ומציאות',
-      icon: lostAndFoundIcon,
-      iconType: 'image'
+      label: 'השבת אבידה',
+      icon: lostFoundIcon,
+      iconType: 'svg'
     },
     {
       path: '/',

@@ -2,7 +2,7 @@
 const he = {
   nav: {
     home: 'ראשי',
-    lostAndFound: 'אבידות ומציאות',
+    lostAndFound: 'השבת אבידה',
     carpool: 'קארפול',
     education: 'חינוך ותרבות',
     business: 'עסקים',
@@ -78,7 +78,7 @@ const he = {
     }
   },
   lostAndFound: {
-    title: 'אבידות ומציאות',
+    title: 'השבת אבידה',
     report: ' הוספת דיווח על אבידה או מציאה',
     recentReports: '',
     loadingItems: 'טוען פריטים...',

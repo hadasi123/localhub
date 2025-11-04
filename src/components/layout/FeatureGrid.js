@@ -13,45 +13,32 @@ const FeatureGrid = () => {
   const leftColumn = featureItems.slice(0, 3);
   const rightColumn = featureItems.slice(3, 6);
 
+  const renderCard = (item) => (
+    <div
+      key={item.path}
+      className="feature-card"
+      onClick={() => navigateTo(item.path)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          navigateTo(item.path);
+        }
+      }}
+    >
+      <img src={item.icon} alt={item.label} className="feature-icon" />
+      <h3 className="feature-title">{item.label}</h3>
+    </div>
+  );
+
   return (
     <div className="features-grid two-col">
       <div className="features-column">
-        {leftColumn.map((item) => (
-          <div
-            key={item.path}
-            className="feature-card"
-            onClick={() => navigateTo(item.path)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                navigateTo(item.path);
-              }
-            }}
-          >
-            <h3 className="feature-title">{item.label}</h3>
-          </div>
-        ))}
+        {leftColumn.map(renderCard)}
       </div>
       <div className="features-column">
-        {rightColumn.map((item) => (
-          <div
-            key={item.path}
-            className="feature-card"
-            onClick={() => navigateTo(item.path)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                navigateTo(item.path);
-              }
-            }}
-          >
-            <h3 className="feature-title">{item.label}</h3>
-          </div>
-        ))}
+        {rightColumn.map(renderCard)}
       </div>
     </div>
   );
