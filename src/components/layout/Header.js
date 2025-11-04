@@ -76,8 +76,13 @@ const Header = () => {
                 navigateTo(item.path);
               }}
             >
-              
               {item.label}
+              <img 
+                src={item.icon} 
+                alt="" 
+                className="mobile-nav-icon"
+                style={{ width: '24px', height: '24px', marginRight: '4px' }}
+              />
             </a>
           ))}
         </nav>

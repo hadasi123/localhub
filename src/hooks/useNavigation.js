@@ -20,44 +20,50 @@ export const useNavigation = () => {
       path: '/sell',
       label: 'לוח מודעות',
       icon: sellIcon,
-      iconType: 'svg'
-    
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '36px'
     },
     {
       path: '/phone-book',
       label: 'ספר טלפונים',
       icon: phoneBookIcon,
-      iconType: 'svg'
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '46px'
     },
     {
       path: '/business',
       label: 'עסקים',
       icon: businessIcon,
-      iconType: 'svg'
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '40px'
     },
     {
       path: '/education',
       label: 'חינוך ותרבות',
       icon: educationIcon,
-      iconType: 'svg'
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '48px'
     },
     {
       path: '/carpool',
       label: 'קארפול',
       icon: carpoolIcon,
-      iconType: 'svg'
+      iconType: 'svg',
+      iconWidth: '70px',
+      iconHeight: '50px'
     },
     {
       path: '/lost-and-found',
       label: 'השבת אבידה',
       icon: lostFoundIcon,
-      iconType: 'svg'
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '48px'
     },
-    {
-      path: '/',
-      label: 'ראשי',
-      icon: '🏠'
-    }
   ];
 
   const isActiveRoute = (path) => {

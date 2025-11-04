@@ -27,7 +27,15 @@ const FeatureGrid = () => {
         }
       }}
     >
-      <img src={item.icon} alt={item.label} className="feature-icon" />
+      <img 
+        src={item.icon} 
+        alt={item.label} 
+        className="feature-icon"
+        style={{
+          '--icon-width': item.iconWidth,
+          '--icon-height': item.iconHeight
+        }}
+      />
       <h3 className="feature-title">{item.label}</h3>
     </div>
   );
