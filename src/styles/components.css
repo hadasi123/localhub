@@ -142,6 +142,18 @@
   margin-top: var(--spacing-xl);
 }
 
+/* Two-column layout for feature grid */
+.features-grid.two-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.features-column {
+  display: grid;
+  /* Force equal heights for each row/card */
+  grid-auto-rows: 80px;
+  row-gap: var(--spacing-lg);
+}
+
 .feature-card {
   background-color: var(--white);
   border-radius: var(--radius-lg);
@@ -151,6 +163,12 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid transparent;
+  /* Make each card fill its grid row height */
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .feature-card:hover {
@@ -172,7 +190,7 @@
 }
 
 .feature-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-l);
   font-weight: 600;
   color: var(--grey-900);
   margin-bottom: var(--spacing-sm);

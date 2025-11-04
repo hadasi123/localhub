@@ -33,16 +33,16 @@ const AirPollutionCard = () => {
         <h3 className="card-title">איכות אוויר</h3>
       </div>
       <div className="card-body" style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>{aqi.emoji}</div>
+        <div style={{ fontSize: '3rem', marginBottom: '0.1rem' }}>{aqi.emoji}</div>
         <div style={{ 
-          fontSize: '1.5rem', 
+          fontSize: '1.3rem', 
           fontWeight: 'bold', 
           color: aqi.color,
-          marginBottom: '0.5rem'
+          marginBottom: '0.1rem'
         }}>
           {aqi.level}
         </div>
-        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '0.1rem' }}>
           {aqi.description}
         </div>
         

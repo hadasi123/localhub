@@ -35,7 +35,7 @@ const HomePage = () => {
           </Button>
         </div>
 
-        <div>
+        <div style={{ marginBottom: '64px' }}>
           <FeatureGrid />
         </div>
 
