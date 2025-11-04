@@ -13,8 +13,8 @@
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: row-reverse;
+  justify-content: space-between;
+  min-height: 60px;
 }
 
 /* RTL Support */
@@ -23,27 +23,6 @@
   text-align: right;
 }
 
-.rtl .header-content {
-  flex-direction: row-reverse;
-}
-
-.rtl .nav {
-  flex-direction: row-reverse;
-}
-
-.rtl .mobile-nav {
-  left: auto;
-  right: 0;
-  transform-origin: right;
-}
-
-.rtl .mobile-nav-header {
-  flex-direction: row-reverse;
-}
-
-.rtl .mobile-nav-items {
-  text-align: right;
-}
 
 .logo {
   font-size: var(--font-size-2xl);

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useNavigation } from '../../hooks/useNavigation';
 import { useI18n } from '../../i18n';
+import menuIcon from '../../assets/icons/icons/menu.svg';
 
 const Header = () => {
   const { 
@@ -18,12 +19,38 @@ const Header = () => {
 
   return (
     <>
-      <header className="header rtl">
+      <header className="header">
         <div className="container px-4">
-          <div className="header-content rtl">
+          <div className="header-content">
             {/* Desktop Navigation */}
-            <div className="logo">שכונת אריאל שרון</div>
-            <nav className="nav rtl">
+
+             {/* Mobile Menu Toggle */}
+            <button
+              className="mobile-nav-toggle"
+              onClick={toggleMobileMenu}
+              aria-label={t('common.toggleMobileMenu', 'Toggle mobile menu')}
+              style={{ 
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '8px',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer'
+              }}
+            >
+              <img src={menuIcon} alt="Menu" style={{ width: '24px', height: '24px' }} />
+            </button>
+            <div className="logo" style={{ 
+              display: 'flex',
+              alignItems: 'center',
+              flex: 1,
+              justifyContent: 'center',
+              padding: '8px'
+            }}>
+              שכונת אריאל שרון
+            </div>
+            <nav className="nav">
               {[...navigationItems].map((item) => (
                 <a
                   key={item.path}
@@ -40,22 +67,14 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Mobile Menu Toggle */}
-            <button style={{flex: 1}}
-              className="mobile-nav-toggle"
-              onClick={toggleMobileMenu}
-              aria-label={t('common.toggleMobileMenu', 'Toggle mobile menu')}
-            >
-              ☰
-            </button>
+           
           </div>
         </div>
       </header>
 
       {/* Mobile Navigation */}
-      <div className={`mobile-nav rtl ${isMobileMenuOpen ? 'open' : ''}`}>
+      <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-nav-header">
-          <div className="logo">שכונת אריאל שרון</div>
           <button 
             className="mobile-nav-close"
             onClick={closeMobileMenu}
