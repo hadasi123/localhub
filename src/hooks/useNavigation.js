@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import sellIcon from '../assets/icons/icons/sell.svg';
-import phoneBookIcon from '../assets/icons/icons/phonebook.svg';
-import businessIcon from '../assets/icons/icons/bussinesses.svg';
-import educationIcon from '../assets/icons/icons/education.svg';
-import carpoolIcon from '../assets/icons/icons/carpool.svg';
-import lostFoundIcon from '../assets/icons/icons/lost-found.svg';
+import sellIcon from '../assets/icons/feature-icons/sell.svg';
+import phoneBookIcon from '../assets/icons/feature-icons/phonebook.svg';
+import businessIcon from '../assets/icons/feature-icons/bussinesses.svg';
+import educationIcon from '../assets/icons/feature-icons/education.svg';
+import carpoolIcon from '../assets/icons/feature-icons/carpool.svg';
+import lostFoundIcon from '../assets/icons/feature-icons/lost-found.svg';
 
 export const useNavigation = () => {
   const location = useLocation();

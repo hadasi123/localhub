@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import weatherService from '../../services/weatherService';
-import pollution12 from '../../assets/icons/pollution-12.svg';
-import pollution35 from '../../assets/icons/pollution-35.4.svg';
-import pollution55 from '../../assets/icons/pollution-55.4.svg';
-import pollution150 from '../../assets/icons/pollution-150.4.svg';
-import pollution250 from '../../assets/icons/pollution-250.4.svg';
-import pollutionOther from '../../assets/icons/pollution-other.svg';
+import pollution12 from '../../assets/icons/pollution-icons/pollution-12.svg';
+import pollution35 from '../../assets/icons/pollution-icons/pollution-35.4.svg';
+import pollution55 from '../../assets/icons/pollution-icons/pollution-55.4.svg';
+import pollution150 from '../../assets/icons/pollution-icons/pollution-150.4.svg';
+import pollution250 from '../../assets/icons/pollution-icons/pollution-250.4.svg';
+import pollutionOther from '../../assets/icons/pollution-icons/pollution-other.svg';
 
 // Calculate Air Quality Index based on PM2.5 (US EPA standard)
 const calculateAQI = (pm25) => {

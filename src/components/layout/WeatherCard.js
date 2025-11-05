@@ -52,7 +52,7 @@ const WeatherCard = () => {
       <CardBody>
         <div className="text-center">
           <div className="weather-icon mb-2">
-            {getWeatherIcon(weather.icon)}
+            <img src={getWeatherIcon(weather.icon)} alt="" />
           </div>
           
           <div className="weather-temp">
@@ -63,9 +63,6 @@ const WeatherCard = () => {
             {weather.description}
           </div>
           
-          <div className="weather-location">
-            {weather.location}
-          </div>
         </div>
       </CardBody>
     </Card>

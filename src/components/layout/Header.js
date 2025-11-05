@@ -3,7 +3,7 @@
 import React from "react";
 import { useNavigation } from "../../hooks/useNavigation";
 import { useI18n } from "../../i18n";
-import menuIcon from "../../assets/icons/icons/menu.svg";
+import menuIcon from "../../assets/icons/feature-icons/menu.svg";
 
 const Header = () => {
   const {
@@ -23,6 +23,21 @@ const Header = () => {
         <div className="container px-4">
           <div className="header-content">
             {/* Desktop Navigation */}
+
+            
+            <div
+              className="logo"
+              onClick={() => navigateTo('/')}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flex: 1,
+                justifyContent: "center",
+                padding: "8px",
+              }}
+            >
+              שכונת אריאל שרון
+            </div>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -45,19 +60,7 @@ const Header = () => {
                 style={{ width: "24px", height: "24px" }}
               />
             </button>
-            <div
-              className="logo"
-              onClick={() => navigateTo('/')}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flex: 1,
-                justifyContent: "center",
-                padding: "8px",
-              }}
-            >
-              שכונת אריאל שרון
-            </div>
+
             <nav className="nav">
               {[...navigationItems].map((item) => (
                 <a

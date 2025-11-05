@@ -4,6 +4,7 @@
 export const WeatherTypes = {
   CLEAR: 'clear',
   CLOUDY: 'cloudy',
+  LITTLE_CLOUDY: 'little-cloudy',
   RAINY: 'rainy',
   STORMY: 'stormy',
   SNOWY: 'snowy',

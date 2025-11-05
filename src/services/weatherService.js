@@ -1,15 +1,24 @@
 // Weather service for LocalHub - Data Layer
 
 import { createWeatherData, WeatherTypes } from '../types';
+// Use SVG icons instead of emoji
+import clearIcon from '../assets/icons/weather-icons/clear.svg';
+import cloudyIcon from '../assets/icons/weather-icons/cloudy.svg';
+import littleCloudyIcon from '../assets/icons/weather-icons/little-cloudy.svg';
+import rainyIcon from '../assets/icons/weather-icons/rainy.svg';
+import stormyIcon from '../assets/icons/weather-icons/stormy.svg';
+import snowyIcon from '../assets/icons/weather-icons/snowy.svg';
+import foggyIcon from '../assets/icons/weather-icons/foggy.svg';
 
 // Weather icons mapping
 export const weatherIcons = {
-  [WeatherTypes.CLEAR]: '☀️',
-  [WeatherTypes.CLOUDY]: '☁️',
-  [WeatherTypes.RAINY]: '🌧️',
-  [WeatherTypes.STORMY]: '⛈️',
-  [WeatherTypes.SNOWY]: '❄️',
-  [WeatherTypes.FOGGY]: '🌫️'
+  [WeatherTypes.CLEAR]: clearIcon,
+  [WeatherTypes.CLOUDY]: cloudyIcon,
+  [WeatherTypes.LITTLE_CLOUDY]: littleCloudyIcon,
+  [WeatherTypes.RAINY]: rainyIcon,
+  [WeatherTypes.STORMY]: stormyIcon,
+  [WeatherTypes.SNOWY]: snowyIcon,
+  [WeatherTypes.FOGGY]: foggyIcon
 };
 
 // Weather service class
@@ -22,7 +31,7 @@ class WeatherService {
       latitude: 34.84,
       longitude: 32.06
     };
-  }
+}
 
   // Get current weather for Israel using Open-Meteo API
   async getCurrentWeather() {
@@ -91,13 +100,13 @@ class WeatherService {
     const weatherCodes = {
       0: { description: 'שמיים בהירים', icon: WeatherTypes.CLEAR },
       1: { description: 'לרוב שמיים בהירים', icon: WeatherTypes.CLEAR },
-      2: { description: 'מעונן חלקית', icon: WeatherTypes.CLOUDY },
+      2: { description: 'מעונן חלקית', icon: WeatherTypes.LITTLE_CLOUDY },
       3: { description: 'עננות מורגשת', icon: WeatherTypes.CLOUDY },
       45: { description: 'עננות', icon: WeatherTypes.FOGGY },
       48: { description: 'עננות', icon: WeatherTypes.FOGGY },
-      51: { description: 'עננות קלה', icon: WeatherTypes.RAINY },
-      53: { description: 'עננות בינונית', icon: WeatherTypes.RAINY },
-      55: { description: 'עננות כבדה', icon: WeatherTypes.RAINY },
+      51: { description: 'עננות קלה', icon: WeatherTypes.LITTLE_CLOUDY },
+      53: { description: 'עננות בינונית', icon: WeatherTypes.CLOUDY },
+      55: { description: 'עננות כבדה', icon: WeatherTypes.CLOUDY },
       61: { description: 'טפטוף לפרקים', icon: WeatherTypes.RAINY },
       63: { description: 'גשום', icon: WeatherTypes.RAINY },
       65: { description: 'גשם כבד', icon: WeatherTypes.RAINY },
@@ -138,6 +147,7 @@ class WeatherService {
   }
 
   // Get weather icon
+  // Returns an SVG URL/path. Consumers should render it with an <img src={...} />.
   getWeatherIcon(weatherType) {
     return weatherIcons[weatherType] || weatherIcons[WeatherTypes.CLEAR];
   }
