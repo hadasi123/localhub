@@ -6,11 +6,24 @@ import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card'
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
+import { useAuth } from '../../context/AuthContext';
 
 const SellPage = () => {
   const { items, loading, addItem } = useData('sell');
   const { t } = useI18n();
+  const { ensureAuthenticated } = useAuth() || {};
   const [showForm, setShowForm] = useState(false);
+  const handleOpenForm = async () => {
+    try {
+      const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
+      if (useFirebase && ensureAuthenticated) {
+        await ensureAuthenticated();
+      }
+      setShowForm(true);
+    } catch (e) {
+      // User cancelled auth or failed — keep form closed
+    }
+  };
   const [formData, setFormData] = useState({
     description: '',
     price: 0,
@@ -126,7 +139,7 @@ const SellPage = () => {
                   
                 </div>
                 
-                <div className="form-group">
+                <div className="form-group" style={{ marginTop: '16px' }}>
                   <label className="form-label">{t('labels.description')}</label>
                   <textarea
                     name="description"
@@ -205,7 +218,7 @@ const SellPage = () => {
           {!showForm && (
             <div className="flex justify-center mt-8">
               <Button 
-                onClick={() => setShowForm(true)}
+                onClick={handleOpenForm}
                 className="w-full md:w-auto"
               >
                 {t('sell.sellItem')}

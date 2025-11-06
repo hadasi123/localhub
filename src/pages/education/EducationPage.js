@@ -6,9 +6,11 @@ import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card'
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
+import { useAuth } from '../../context/AuthContext';
 
 const EducationPage = () => {
   const { items, loading, addItem } = useData('education');
+  const { ensureAuthenticated } = useAuth() || {};
   const { t } = useI18n();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -52,6 +54,18 @@ const EducationPage = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleOpenForm = async () => {
+    try {
+      const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
+      if (useFirebase && ensureAuthenticated) {
+        await ensureAuthenticated();
+      }
+      setShowForm(true);
+    } catch (e) {
+      // cancelled
+    }
   };
 
   return (
@@ -262,7 +276,7 @@ const EducationPage = () => {
           {!showForm && (
             <div className="flex justify-center mt-8" style={{ marginBottom: '24px' }}>
               <Button 
-                onClick={() => setShowForm(true)}
+                onClick={handleOpenForm}
                 className="w-full md:w-auto"
               >
                 {t('education.addCourse')}

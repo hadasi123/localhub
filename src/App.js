@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/globals.css';
 import './styles/components.css';
 import './styles/rtl.css';
+import { AuthProvider } from './context/AuthContext';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -19,9 +20,10 @@ import TermsOfUse from './pages/TermsOfUse';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/lost-and-found" element={<LostAndFoundPage />} />
           <Route path="/carpool" element={<CarpoolPage />} />
@@ -30,9 +32,10 @@ function App() {
           <Route path="/phone-book" element={<PhoneBookPage />} />
           <Route path="/sell" element={<SellPage />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
-        </Routes>
-      </div>
-    </Router>
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

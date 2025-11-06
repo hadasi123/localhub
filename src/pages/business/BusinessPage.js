@@ -6,9 +6,11 @@ import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card'
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
+import { useAuth } from '../../context/AuthContext';
 
 const BusinessPage = () => {
   const { items, loading, addItem } = useData('business');
+  const { ensureAuthenticated } = useAuth() || {};
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -43,6 +45,18 @@ const BusinessPage = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleOpenForm = async () => {
+    try {
+      const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
+      if (useFirebase && ensureAuthenticated) {
+        await ensureAuthenticated();
+      }
+      setShowForm(true);
+    } catch (e) {
+      // cancelled
+    }
   };
 
   const { t } = useI18n();
@@ -187,7 +201,7 @@ const BusinessPage = () => {
           {!showForm && (
             <div className="flex justify-center mt-8">
               <Button 
-                onClick={() => setShowForm(true)}
+                onClick={handleOpenForm}
                 className="w-full md:w-auto"
               >
                 {t('business.addBusinessBtn')}

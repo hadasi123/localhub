@@ -1,10 +1,31 @@
 // Feature Grid component - Presentation Layer
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigation } from '../../hooks/useNavigation';
 
 const FeatureGrid = () => {
   const { navigationItems, navigateTo } = useNavigation();
+
+  // Keep track of a pending navigation timeout to avoid double navigations
+  const pendingTimeoutRef = useRef(null);
+
+  const delayedNavigate = (path) => {
+    // Clear any existing timeout to debounce rapid interactions
+    if (pendingTimeoutRef.current) {
+      clearTimeout(pendingTimeoutRef.current);
+    }
+    pendingTimeoutRef.current = setTimeout(() => {
+      navigateTo(path);
+      pendingTimeoutRef.current = null;
+    }, 800);
+  };
+
+  // Cleanup on unmount to avoid running navigation after component is gone
+  useEffect(() => () => {
+    if (pendingTimeoutRef.current) {
+      clearTimeout(pendingTimeoutRef.current);
+    }
+  }, []);
 
   // Filter out the home item for the feature grid
   const featureItems = navigationItems.filter(item => item.path !== '/');
@@ -17,13 +38,13 @@ const FeatureGrid = () => {
     <div
       key={item.path}
       className="feature-card"
-      onClick={() => navigateTo(item.path)}
+      onClick={() => delayedNavigate(item.path)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          navigateTo(item.path);
+          delayedNavigate(item.path);
         }
       }}
     >

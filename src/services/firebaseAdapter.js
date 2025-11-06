@@ -2,7 +2,7 @@
 // so you can switch data providers without changing hooks.
 
 import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, where } from 'firebase/firestore';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import { 
   createLostAndFoundItem,
   createCarpoolItem,
@@ -66,10 +66,24 @@ const firebaseAdapter = {
 
   async addItem(type, itemData) {
     try {
+      if (!auth.currentUser) {
+        console.warn('Firestore addItem blocked: no authenticated user');
+        throw new Error('NOT_AUTHENTICATED');
+      }
       const id = itemData.id || generateId();
-      const item = createItemByType(type, { ...itemData, id, createdAt: new Date().toISOString() });
-      await setDoc(doc(db, collectionNameForType(type), id), item);
-      return item;
+      // First, map to the normalized item shape
+      const normalized = createItemByType(type, { 
+        ...itemData, 
+        id, 
+        createdAt: new Date().toISOString()
+      });
+      // Then, append ownership metadata that type factories may drop
+      const itemToSave = {
+        ...normalized,
+        createdBy: auth.currentUser.uid
+      };
+      await setDoc(doc(db, collectionNameForType(type), id), itemToSave);
+      return itemToSave;
     } catch (err) {
       console.error('Firestore addItem error:', err);
       throw err;
@@ -79,7 +93,8 @@ const firebaseAdapter = {
   async updateItem(type, id, updates) {
     try {
       const docRef = doc(db, collectionNameForType(type), id);
-      await updateDoc(docRef, { ...updates, updatedAt: new Date().toISOString() });
+      const { createdBy, ...safeUpdates } = updates || {};
+      await updateDoc(docRef, { ...safeUpdates, updatedAt: new Date().toISOString() });
       const updated = await (await getDocs(collection(db, collectionNameForType(type)))).docs.find(d => d.id === id);
       return updated ? { id: updated.id, ...updated.data() } : null;
     } catch (err) {

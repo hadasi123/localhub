@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import dataService from '../services/dataService';
+import { useAuth } from '../context/AuthContext';
 
 export const useData = (type) => {
+  const { ensureAuthenticated } = useAuth() || { ensureAuthenticated: async () => {} };
+  const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,6 +28,9 @@ export const useData = (type) => {
   const addItem = useCallback(async (itemData) => {
     try {
       setError(null);
+      if (useFirebase) {
+        await ensureAuthenticated();
+      }
       const newItem = await dataService.addItem(type, itemData);
       setItems(prev => [...prev, newItem]);
       return newItem;
@@ -32,11 +38,14 @@ export const useData = (type) => {
       setError(err.message);
       throw err;
     }
-  }, [type]);
+  }, [type, ensureAuthenticated, useFirebase]);
 
   const updateItem = useCallback(async (id, updates) => {
     try {
       setError(null);
+      if (useFirebase) {
+        await ensureAuthenticated();
+      }
       const updatedItem = await dataService.updateItem(type, id, updates);
       setItems(prev => prev.map(item => 
         item.id === id ? updatedItem : item
@@ -46,11 +55,14 @@ export const useData = (type) => {
       setError(err.message);
       throw err;
     }
-  }, [type]);
+  }, [type, ensureAuthenticated, useFirebase]);
 
   const deleteItem = useCallback(async (id) => {
     try {
       setError(null);
+      if (useFirebase) {
+        await ensureAuthenticated();
+      }
       await dataService.deleteItem(type, id);
       setItems(prev => prev.filter(item => item.id !== id));
       return true;
@@ -58,7 +70,7 @@ export const useData = (type) => {
       setError(err.message);
       throw err;
     }
-  }, [type]);
+  }, [type, ensureAuthenticated, useFirebase]);
 
   const searchItems = useCallback(async (query) => {
     try {

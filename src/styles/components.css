@@ -163,7 +163,7 @@
 .feature-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
-  border-color: var(--primary-green);
+  border-color: var(--white);
 }
 
 .feature-icon {
@@ -215,7 +215,7 @@
   background-color: var(--white);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   box-shadow: var(--shadow-sm);
   border-left: 4px solid var(--primary-green);
 }
@@ -234,26 +234,28 @@
 }
 
 .content-card-title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--grey-900);
 }
 
 .content-card-body {
   color: var(--grey-700);
-  line-height: 1.6;
+  line-height: 1;
 }
 
 /* Form Elements */
 .form-group {
-  margin-bottom: var(--spacing-lg);
+  /* Space between form items (label+input blocks) */
+  margin-bottom: 4px;
 }
 
 .form-label {
   display: block;
   font-weight: 500;
   color: var(--grey-800);
-  margin-bottom: var(--spacing-sm);
+  /* No gap between label and its input */
+  margin-bottom: 0;
 }
 
 .form-input {
@@ -272,7 +274,7 @@
 }
 
 .form-textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
 }
 

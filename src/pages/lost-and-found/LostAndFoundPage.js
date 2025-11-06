@@ -6,9 +6,11 @@ import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
 import { storage } from '../../services/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useAuth } from '../../context/AuthContext';
 
 const LostAndFoundPage = () => {
   const { items, loading, addItem, error, refresh } = useData('lost-and-found');
+  const { ensureAuthenticated } = useAuth() || {};
   const [showForm, setShowForm] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -71,6 +73,18 @@ const LostAndFoundPage = () => {
     } else {
       setSelectedFile(null);
       setPreviewUrl(null);
+    }
+  };
+
+  const handleOpenForm = async () => {
+    try {
+      const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
+      if (useFirebase && ensureAuthenticated) {
+        await ensureAuthenticated();
+      }
+      setShowForm(true);
+    } catch (e) {
+      // cancelled
     }
   };
 
@@ -159,7 +173,7 @@ const LostAndFoundPage = () => {
           {!showForm && (
             <div className="flex justify-center mt-8">
               <Button 
-                onClick={() => setShowForm(true)}
+                onClick={handleOpenForm}
                 className="w-full md:w-auto"
               >
                 {t('lostAndFound.report')}

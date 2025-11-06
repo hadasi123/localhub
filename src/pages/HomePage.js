@@ -52,10 +52,6 @@ const HomePage = () => {
              <span>דיווח על מפגע</span>
           </Button>
         </div>
-
-        <div style={{ marginTop: '32px', marginBottom: '32px' }}>
-             <MunicipalityCard />
-          </div>
         
         {/* Terms of Use button at the bottom */}
         <div className="flex justify-center mb-8">
@@ -63,6 +59,7 @@ const HomePage = () => {
             onClick={handleTermsClick}
             className="w-full md:w-auto"
             style={{
+              marginTop: '32px',
               marginBottom: '32px',
               backgroundColor: 'var(--white)',
               color: 'var(--grey-500)',
