@@ -15,6 +15,7 @@ import EducationPage from './pages/education/EducationPage';
 import BusinessPage from './pages/business/BusinessPage';
 import PhoneBookPage from './pages/phone-book/PhoneBookPage';
 import SellPage from './pages/sell/SellPage';
+import TermsOfUse from './pages/TermsOfUse';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/business" element={<BusinessPage />} />
           <Route path="/phone-book" element={<PhoneBookPage />} />
           <Route path="/sell" element={<SellPage />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
         </Routes>
       </div>
     </Router>

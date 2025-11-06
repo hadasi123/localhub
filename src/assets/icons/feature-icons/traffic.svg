@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#039BE5;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:#81D4FA;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#EC407A;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{fill:#FFA726;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:#80CBC4;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#F48FB1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#FFCC80;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#E0F2F1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#26A69A;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st9{fill:none;stroke:#F57C00;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st10{fill:none;stroke:#D81B60;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st11{fill:#EEEEEE;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st12{fill:none;stroke:#BDBDBD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st13{fill:none;stroke:#E1F5FE;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st14{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st15{fill:none;stroke:#29B6F6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st16{fill:none;stroke:#4FC3F7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st17{fill:none;stroke:#0277BD;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="Traffic_Light">
+	<g id="Traffic_Ligt">
+		<path class="st0" d="M43,52.5H21c-1.7,0-3-1.3-3-3v-46c0-1.7,1.3-3,3-3h22c1.7,0,3,1.3,3,3v46C46,51.2,44.7,52.5,43,52.5z"/>
+		<path class="st1" d="M42,3.5c0.6,0,1,0.4,1,1v44c0,0.6-0.4,1-1,1H22c-0.6,0-1-0.4-1-1v-44c0-0.6,0.4-1,1-1H42z"/>
+		<circle class="st2" cx="32" cy="12" r="6"/>
+		<circle class="st3" cx="32" cy="26.5" r="6"/>
+		<circle class="st4" cx="32" cy="41" r="6"/>
+		<path class="st5" d="M29.2,9.2c1.6-1.6,4.1-1.6,5.7,0"/>
+		<path class="st6" d="M29.2,23.7c1.6-1.6,4.1-1.6,5.7,0"/>
+		<path class="st7" d="M29.2,38.2c1.6-1.6,4.1-1.6,5.7,0"/>
+		<path class="st8" d="M34.8,43.8c-1.6,1.6-4.1,1.6-5.7,0"/>
+		<path class="st9" d="M34.8,29.3c-1.6,1.6-4.1,1.6-5.7,0"/>
+		<path class="st10" d="M34.8,14.8c-1.6,1.6-4.1,1.6-5.7,0"/>
+		<polygon class="st0" points="18,17 15,17 12,7 18,7 		"/>
+		<polygon class="st0" points="18,31.5 15,31.5 12,21.5 18,21.5 		"/>
+		<polygon class="st0" points="18,46 15,46 12,36 18,36 		"/>
+		<polygon class="st0" points="46,17 49,17 52,7 46,7 		"/>
+		<polygon class="st0" points="46,31.5 49,31.5 52,21.5 46,21.5 		"/>
+		<polygon class="st0" points="46,46 49,46 52,36 46,36 		"/>
+		<rect x="28" y="52.5" class="st11" width="8" height="11"/>
+		<line class="st12" x1="30" y1="61.5" x2="34" y2="61.5"/>
+	</g>
+</g>
+</svg>
