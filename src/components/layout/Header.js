@@ -4,6 +4,7 @@ import React from "react";
 import { useNavigation } from "../../hooks/useNavigation";
 import { useI18n } from "../../i18n";
 import menuIcon from "../../assets/icons/feature-icons/menu.svg";
+import closeIcon from "../../assets/icons/feature-icons/close.svg";
 
 const Header = () => {
   const {
@@ -88,7 +89,11 @@ const Header = () => {
             onClick={closeMobileMenu}
             aria-label={t("common.closeMobileMenu", "Close mobile menu")}
           >
-            ×
+            <img
+              src={closeIcon}
+              alt="Close"
+              style={{ width: "24px", height: "24px" }}
+            />
           </button>
         </div>
 

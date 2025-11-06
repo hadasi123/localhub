@@ -3,8 +3,8 @@
 /* Header Component */
 .header {
   background-color: var(--white);
-  box-shadow: var(--shadow-sm);
-  padding: var(--spacing-md) 0;
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xs) 0;
   position: sticky;
   top: 0;
   z-index: 100;
