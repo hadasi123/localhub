@@ -130,7 +130,7 @@ const LostAndFoundPage = () => {
       <CardBody>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-group">
+            <div className="form-group" style={{marginTop:16}}>
               <label className="form-label">{t('labels.contact')}</label>
               <input className="form-input" name="contact" placeholder={t('labels.contactDetails')} value={formData.contact} onChange={handleInputChange} required />
             </div>
@@ -138,12 +138,6 @@ const LostAndFoundPage = () => {
             <div className="form-group">
               <label className="form-label">{t('labels.description')}</label>
               <textarea className="form-input form-textarea" name="description" placeholder={t('labels.description')} value={formData.description} onChange={handleInputChange} required />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">הוספת תמונה (לא חובה)</label>
-              <input type="file" accept="image/*" onChange={handleFileChange} className="form-input" />
-              {previewUrl && <img src={previewUrl} alt="preview" style={{ maxWidth: 120, marginTop: 8 }} />}
             </div>
           </div>
 

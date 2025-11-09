@@ -78,6 +78,25 @@
   fill: currentColor;
 }
 
+/* Mobile nav list + divider styling */
+.mobile-nav-items {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tighter vertical spacing */
+.mobile-nav-item {
+  padding: var(--spacing-xs) var(--spacing-xs);
+}
+
+/* Full-width edge-to-edge divider */
+.mobile-nav-divider {
+  height: 1px;
+  background-color: var(--grey-300);
+  margin: 0; /* remove horizontal margins to span full width */
+  width: 100%;
+}
+
 /* Weather Card */
 .weather-card {
   background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);

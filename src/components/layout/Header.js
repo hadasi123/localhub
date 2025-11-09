@@ -98,24 +98,20 @@ const Header = () => {
         </div>
 
         <nav className="mobile-nav-items">
-          {navigationItems.map((item) => (
-            <a
-              key={item.path}
-              href={item.path}
-              className={`mobile-nav-item ${isActiveRoute(item.path) ? "active" : ""}`}
-              onClick={(e) => {
-                e.preventDefault();
-                navigateTo(item.path);
-              }}
-            >
-              {item.label}
-              <img
-                src={item.icon}
-                alt=""
-                className="mobile-nav-icon"
-                style={{ width: "24px", height: "24px", marginRight: "4px" }}
-              />
-            </a>
+          {navigationItems.map((item, idx) => (
+            <React.Fragment key={item.path}>
+              <a
+                href={item.path}
+                className={`mobile-nav-item ${isActiveRoute(item.path) ? "active" : ""}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(item.path);
+                }}
+              >
+                {item.label}
+              </a>
+              {idx < navigationItems.length - 1 && <div className="mobile-nav-divider" aria-hidden="true" />}
+            </React.Fragment>
           ))}
         </nav>
       </div>

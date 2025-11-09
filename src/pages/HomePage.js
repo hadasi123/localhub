@@ -59,13 +59,12 @@ const HomePage = () => {
             onClick={handleTermsClick}
             className="w-full md:w-auto"
             style={{
-              marginTop: '32px',
-              marginBottom: '32px',
-              backgroundColor: 'var(--white)',
+              marginTop: '40px',
+              backgroundColor: 'var(--grey-50)',
               color: 'var(--grey-500)',
-              border: '1px solid var(--grey-300)',
               padding: '10px 20px',
-              fontWeight: 600
+              fontWeight: 600,
+              textDecoration: 'underline'
             }}
           >
             תנאי שימוש
