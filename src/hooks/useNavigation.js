@@ -8,6 +8,7 @@ import businessIcon from '../assets/icons/feature-icons/bussinesses.svg';
 import educationIcon from '../assets/icons/feature-icons/education.svg';
 import carpoolIcon from '../assets/icons/feature-icons/carpool.svg';
 import lostFoundIcon from '../assets/icons/feature-icons/lost-found.svg';
+import infoIcon from '../assets/icons/feature-icons/main.svg';
 
 export const useNavigation = () => {
   const location = useLocation();
@@ -15,7 +16,8 @@ export const useNavigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Navigation items with icons
-  const navigationItems = [
+  // Full navigation catalog
+  const allNavigationItems = [
     {
       path: '/sell',
       label: 'לוח מודעות',
@@ -24,13 +26,15 @@ export const useNavigation = () => {
       iconWidth: '48px',
       iconHeight: '36px'
     },
+    // Phone book is currently hidden from UI (side menu + feature grid)
     {
       path: '/phone-book',
       label: 'ספר טלפונים',
       icon: phoneBookIcon,
       iconType: 'svg',
       iconWidth: '48px',
-      iconHeight: '46px'
+      iconHeight: '46px',
+      hidden: true
     },
     {
       path: '/business',
@@ -64,7 +68,18 @@ export const useNavigation = () => {
       iconWidth: '48px',
       iconHeight: '48px'
     },
+    {
+      path: '/info',
+      label: 'מידע שימושי',
+      icon: infoIcon,
+      iconType: 'svg',
+      iconWidth: '48px',
+      iconHeight: '48px'
+    },
   ];
+
+  // Filter items visible in navigation UIs
+  const navigationItems = allNavigationItems.filter(item => !item.hidden);
 
   const isActiveRoute = (path) => {
     return location.pathname === path;

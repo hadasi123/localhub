@@ -30,9 +30,10 @@ const FeatureGrid = () => {
   // Filter out the home item for the feature grid
   const featureItems = navigationItems.filter(item => item.path !== '/');
 
-  // Split into two columns with 3 items each
-  const leftColumn = featureItems.slice(0, 3);
-  const rightColumn = featureItems.slice(3, 6);
+  // Split items evenly across two columns regardless of count
+  const midpoint = Math.ceil(featureItems.length / 2);
+  const leftColumn = featureItems.slice(0, midpoint);
+  const rightColumn = featureItems.slice(midpoint);
 
   const renderCard = (item) => (
     <div

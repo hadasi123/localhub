@@ -17,6 +17,7 @@ import BusinessPage from './pages/business/BusinessPage';
 import PhoneBookPage from './pages/phone-book/PhoneBookPage';
 import SellPage from './pages/sell/SellPage';
 import TermsOfUse from './pages/TermsOfUse';
+import InfoCenterPage from './pages/info/InfoCenterPage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/phone-book" element={<PhoneBookPage />} />
           <Route path="/sell" element={<SellPage />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/info" element={<InfoCenterPage />} />
           </Routes>
         </div>
       </Router>
