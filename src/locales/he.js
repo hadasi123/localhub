@@ -97,6 +97,7 @@ const he = {
     placeholderTo: 'יעד הנסיעה',
     date: 'תאריך',
     time: 'שעה',
+    description: 'תיאור',
     availableSeats: 'מקומות פנויים',
     pricePerPerson: 'מחיר לנוסע (₪)',
     driverName: 'שם הנהג',

@@ -20,7 +20,6 @@ const EducationPage = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '',
     contact: '',
    
   });
@@ -36,7 +35,6 @@ const EducationPage = () => {
       setFormData({
         title: '',
         description: '',
-        category: '',
         contact: '',
       });
       setEditingId(null);
@@ -65,7 +63,6 @@ const EducationPage = () => {
         setFormData({
           title: itemToEdit.title || '',
           description: itemToEdit.description || '',
-          category: itemToEdit.category || '',
           contact: itemToEdit.contact || ''
         });
       }
@@ -111,26 +108,7 @@ const EducationPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
-              <label className="form-label">{t('education.category.label')}</label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                className="form-input"
-                required
-              >
-                <option value="">{t('education.category.select')}</option>
-                <option value="language">{t('education.category.language')}</option>
-                <option value="technology">{t('education.category.technology')}</option>
-                <option value="arts">{t('education.category.arts')}</option>
-                <option value="fitness">{t('education.category.fitness')}</option>
-                <option value="cooking">{t('education.category.cooking')}</option>
-                <option value="business">{t('education.category.business')}</option>
-                <option value="other">{t('education.category.other')}</option>
-              </select>
-            </div>
-           
+            
            
             <div className="form-group">
               <label className="form-label">{t('education.form.contact')}</label>
@@ -205,16 +183,16 @@ const EducationPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <CardTitle className="text-lg">{item.title}</CardTitle>
-                    <div className="flex items-center gap-2 text-sm text-grey-500">
-                      <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                        {item.category}
-                      </span>
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">
-                        {item.level}
-                      </span>
+                    
+                    
+                  </CardHeader>
+                  <CardBody style={{marginTop: 8}}>
+                    <p className="text-grey-600 mb-3">{item.description}</p>
+                    <div className="space-y-1 text-sm text-grey-500">
+                      <p><strong>{t('education.form.contact')}:</strong> {item.contact}</p>
                     </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                      <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>
                         <button type="button" aria-label={t('common.edit') || 'Edit'} onClick={() => handleOpenForm(item)}
                           style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
@@ -227,17 +205,6 @@ const EducationPage = () => {
                         </button>
                       </div>
                     )}
-                  </CardHeader>
-                  <CardBody>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
-                    <div className="space-y-1 text-sm text-grey-500">
-                      <p><strong>{t('education.form.instructor')}:</strong> {item.instructor}</p>
-                      <p><strong>{t('education.duration.label')}:</strong> {item.duration}</p>
-                      <p><strong>{t('education.schedule.label')}:</strong> {item.schedule}</p>
-                      <p><strong>{t('education.form.location')}:</strong> {item.location}</p>
-                      <p><strong>{t('education.form.price')}:</strong> ₪{item.price}</p>
-                      <p><strong>{t('education.form.contact')}:</strong> {item.contact}</p>
-                    </div>
                   </CardBody>
                 </Card>
               ))}

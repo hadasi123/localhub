@@ -209,7 +209,7 @@ const LostAndFoundPage = () => {
                       
                     </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                      <div className="flex" style={{ flexDirection: 'row', alignSelf: 'flex-end', gap: 16, justifyContent: 'flex-end' }}>
                         <button type="button" aria-label={t('common.edit')} onClick={() => handleOpenForm(item)} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
                         </button>

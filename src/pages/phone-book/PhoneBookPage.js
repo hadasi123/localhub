@@ -171,27 +171,41 @@ const PhoneBookPage = () => {
               </CardBody>
             </Card>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1">
               {items.map((item) => (
                 <Card key={item.id}>
                   <CardHeader>
                     <CardTitle className="text-lg">{item.name}</CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="text-sm text-grey-500" style={{ marginTop: 8 }}>
+                      <p><strong>{t('phoneBook.labels.phone')}:</strong> <a href={`tel:${item.phone}`} className="text-primary hover:underline">{item.phone}</a></p>
+                      {item.description && (
+                        <p><strong>{t('phoneBook.labels.description')}:</strong> <span className="text-grey-600">{item.description}</span></p>
+                      )}
+                    </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
-                        <button type="button" aria-label={t('common.edit')} onClick={() => handleOpenForm(item)} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
+                      <div className="flex" style={{ flexDirection: 'row', alignSelf: 'flex-end', gap: 16, justifyContent: 'flex-end' }}>
+                        <button
+                          type="button"
+                          aria-label={t('common.edit') || 'Edit'}
+                          onClick={() => handleOpenForm(item)}
+                          style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}
+                        >
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
                         </button>
-                        <button type="button" aria-label={t('common.delete')} onClick={async () => { try { await deleteItem(item.id); } catch (err) { console.error('Delete failed', err); } }} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
+                        <button
+                          type="button"
+                          aria-label={t('common.delete') || 'Delete'}
+                          onClick={async () => {
+                            try { await deleteItem(item.id); } catch (err) { console.error('Delete failed', err); }
+                          }}
+                          style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}
+                        >
                           <img src={trashIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
                         </button>
                       </div>
                     )}
-                  </CardHeader>
-                  <CardBody>
-                    <div className="space-y-2">
-                      <p><strong>{t('phoneBook.labels.phone')}:</strong> <a href={`tel:${item.phone}`} className="text-primary hover:underline">{item.phone}</a></p>
-                      {item.description && <p><strong>{t('phoneBook.labels.description')}:</strong> <span className="text-grey-600">{item.description}</span></p>}
-                    </div>
                   </CardBody>
                 </Card>
               ))}

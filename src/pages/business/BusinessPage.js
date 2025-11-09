@@ -208,8 +208,18 @@ const BusinessPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <CardTitle className="text-lg">{item.name}</CardTitle>
+                    
+                  </CardHeader>
+                  <CardBody>
+                    <p className="text-grey-600 mb-3" style={{marginTop:8}}>{item.description}</p>
+                    <div className="space-y-1 text-sm text-grey-500">
+                      {item.address && <p><strong>{t('business.fields.address')}:</strong> {item.address}</p>}
+                      {item.phone && <p><strong>{t('business.fields.phone')}:</strong> {item.phone}</p>}
+                      {item.website && <p><strong>{t('business.fields.website')}:</strong> <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.website}</a></p>}
+                      
+                    </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                      <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>
                         <button type="button" aria-label={t('common.edit')} onClick={() => handleOpenForm(item)}
                           style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
@@ -222,15 +232,6 @@ const BusinessPage = () => {
                         </button>
                       </div>
                     )}
-                  </CardHeader>
-                  <CardBody>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
-                    <div className="space-y-1 text-sm text-grey-500">
-                      {item.address && <p><strong>{t('business.fields.address')}:</strong> {item.address}</p>}
-                      {item.phone && <p><strong>{t('business.fields.phone')}:</strong> {item.phone}</p>}
-                      {item.website && <p><strong>{t('business.fields.website')}:</strong> <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.website}</a></p>}
-                      {item.hours && <p><strong>{t('business.fields.hours')}:</strong> {item.hours}</p>}
-                    </div>
                   </CardBody>
                 </Card>
               ))}

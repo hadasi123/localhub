@@ -207,22 +207,15 @@ const CarpoolPage = () => {
                 <Card key={item.id}>
                   
                   <CardBody>
-                    <div className="space-y-2 mb-4">
+                    <div className="text-sm text-grey-500">
                       <p><strong>{t('carpool.to')}:</strong> {item.to}</p>
-
                       <p><strong>{t('carpool.date')}:</strong> {new Date(item.date).toLocaleDateString('he-IL')}</p>
                       <p><strong>{t('carpool.time')}:</strong> {item.time}</p>
-                    </div>
-                    
-                    {item.description && (
-                      <p className="text-grey-600 mb-3">{item.description}</p>
-                    )}
-                    
-                    <div className="text-sm text-grey-500">
+                      {item.description && <p><strong>{t('carpool.description')}:</strong> {item.description}</p>}
                       <p><strong>{t('carpool.contact')}:</strong> {item.contact}</p>
                     </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                      <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>
                         <button type="button" aria-label={t('common.edit')} onClick={() => handleOpenForm(item)} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
                         </button>
