@@ -96,6 +96,32 @@ const SellPage = () => {
     }
   }, [showForm]);
 
+  // Map category to badge background color using CSS variables from globals.css
+  const getCategoryBadgeStyle = (category) => {
+    let backgroundColor = 'var(--grey-200)';
+    switch (category) {
+      case 'giveaway':
+        backgroundColor = 'var(--yellow)'; // למסירה
+        break;
+      case 'sale':
+        backgroundColor = 'var(--warning)'; // למכירה
+        break;
+      case 'rent':
+        backgroundColor = 'var(--info-secondary)'; // להשכרה
+        break;
+      default:
+        backgroundColor = 'var(--grey-200)';
+    }
+    return {
+      backgroundColor,
+      color: 'var(--grey-900)',
+      padding: '2px 8px',
+      marginLeft: 8,
+      borderRadius: 8,
+      display: 'inline-block'
+    };
+  };
+
   const renderForm = () => (
     <Card className="mb-0" style={{ maxWidth: 720 }}>
       <CardHeader>
@@ -224,32 +250,26 @@ const SellPage = () => {
               </CardBody>
             </Card>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-1">
               {items.map((item) => (
                 <Card key={item.id}>
                   <CardHeader>
-                    <div className="flex items-center justify-between">
-                      
-                      <div className="text-right">
-                        {item.category !== 'giveaway' && (
-                          <div className="text-xl font-bold text-primary">₪{item.price}</div>
-                        )}
-                        {item.category === 'giveaway' && (
-                          <div className="text-sm text-gray-600">
-                            {t('sell.fields.condition')}: {t(`sell.conditions.${item.condition}`)}
-                          </div>
-                        )}
-                        
-                      </div>
+                    <div style={{ marginBottom: 14}}>
+                      <span className="text-xs" style={getCategoryBadgeStyle(item.category)}>
+                        {t(`sell.category.${item.category}`)}
+                      </span>
+                      <span className="text-xs">{item.description}</span>
                     </div>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                      {t(`sell.category.${item.category}`)}
-                    </span>
-                    
                   </CardHeader>
                   <CardBody>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
-                    <div className="space-y-1 text-sm text-grey-500">
+                    
+                    <div className="text-sm text-grey-500" style={{marginTop:8}}>
+                      {item.category === 'giveaway' && (
+                        <p><strong>{t('sell.fields.condition')}:</strong> {t(`sell.conditions.${item.condition}`)}</p>
+                      )}
+                      {item.category !== 'giveaway' &&  (
+                        <p><strong>{t('sell.fields.price')}:</strong> ₪{item.price}</p>
+                      )}
                       <p><strong>{t('sell.fields.contact')}:</strong> {item.contact}</p>
                       <p><strong>{t('sell.fields.listed')}:</strong> {new Date(item.date).toLocaleDateString()}</p>
                     </div>

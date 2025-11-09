@@ -1,7 +1,7 @@
 // Firestore-backed data adapter implementing a subset of dataService's API
 // so you can switch data providers without changing hooks.
 
-import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, where } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, where } from 'firebase/firestore';
 import { db, auth } from './firebase';
 import { 
   createLostAndFoundItem,
@@ -105,8 +105,22 @@ const firebaseAdapter = {
 
   async deleteItem(type, id) {
     try {
+      if (!auth.currentUser) {
+        console.warn('Firestore deleteItem blocked: no authenticated user');
+        throw new Error('NOT_AUTHENTICATED');
+      }
       const docRef = doc(db, collectionNameForType(type), id);
-      // (Optional) Could check ownership here by fetching doc; omitting for performance assuming rules enforce
+      // Ownership pre-check for clearer UX before hitting rules
+      const snap = await getDoc(docRef);
+      if (!snap.exists()) {
+        return true; // already removed
+      }
+      const data = snap.data();
+      if (data && data.createdBy && data.createdBy !== auth.currentUser.uid) {
+        const err = new Error('FORBIDDEN_NOT_OWNER');
+        err.code = 'forbidden/not-owner';
+        throw err;
+      }
       await deleteDoc(docRef);
       return true;
     } catch (err) {

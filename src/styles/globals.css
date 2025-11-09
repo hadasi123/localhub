@@ -22,6 +22,7 @@
   --white: #FFFFFF;
   --black: #000000;
   --error: #F44336;
+  --yellow: #FFEB00;
   --warning: #FF9800;
   --info: #2196F3;
   --info-secondary: #64B5F6;
@@ -38,6 +39,7 @@
   --font-size-4xl: 2.25rem;
   
   /* Spacing */
+    --spacing-2xs: 0.1rem;
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -188,16 +190,14 @@ a:hover {
 
 .card-header {
   border-bottom: 1px solid var(--grey-200);
-  padding-bottom: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  position: relative; /* anchor absolute action icons inside header */
+
 }
 
 .card-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-l);
   font-weight: 600;
   color: var(--grey-900);
-  margin-bottom: var(--spacing-sm);
+
 }
 
 /* Layout */
