@@ -13,7 +13,7 @@ const he = {
     cancel: 'ביטול',
     loading: 'טוען...',
     submit: 'שלח',
-    add: 'הוסף',
+    add: 'הוספה',
     selectCategory: 'בחר קטגוריה',
     other: 'אחר',
     noItems: 'אין פריטים עדיין.',
@@ -25,7 +25,7 @@ const he = {
   business: {
     title: 'עסקים ונותני שירות בשכונת אריאל שרון',
     addBusiness: 'הוספת עסק מקומי',
-    addBusinessBtn: 'הוסף עסק',
+    addBusinessBtn: 'הוספת עסק חדש',
     localBusinesses: '',
     loadingBusinesses: 'טוען עסקים...',
     noBusinesses: 'אין עסקים רשומים עדיין.',
@@ -40,11 +40,11 @@ const he = {
   sell: {
     title: 'לוח מודעות',
     sellItem: 'הוספת מודעה',
-    listItem: 'פרסם פריט',
+    listItem: 'פרסם מודעה',
     itemsForSale: 'פרסום מודעות מכירה, מסירה והשכרה בשכונת אריאל שרון',
     loadingItems: 'טוען פריטים...',
     noItemsForSale: 'אין פריטים למכירה, מסירה או השכרה עדיין.',
-    beFirstList: 'היה הראשון לפרסם פריט!',
+    beFirstList: 'היה הראשון לפרסם מודעה!',
     fields: {
       contact: 'איש קשר',
       price: 'מחיר',
@@ -94,32 +94,32 @@ const he = {
     noRides: 'אין נסיעות זמינות עדיין.',
     beFirstRide: 'היה הראשון להציע נסיעה!',
     placeholderFrom: 'מיקום התחלה',
-    placeholderTo: 'יעד',
+    placeholderTo: 'יעד הנסיעה',
     date: 'תאריך',
     time: 'שעה',
     availableSeats: 'מקומות פנויים',
     pricePerPerson: 'מחיר לנוסע (₪)',
     driverName: 'שם הנהג',
     contactDetails: 'פרטי קשר',
-    additionalNotes: 'הערות נוספות',
+    additionalNotes: 'הערות ',
     notesPlaceholder: 'מידע נוסף על הנסיעה',
-    submitRide: 'פרסם נסיעה',
+    submitRide: 'הוספת נסיעה',
     from: 'מוצא',
     to: 'יעד',
     seats: 'מקומות',
     price: 'מחיר',
     driver: 'נהג',
     contact: 'יצירת קשר',
-    phone: 'טלפון או אימייל'
+    phone: 'שם, טלפון'
   },
   education: {
     title: 'חינוך ותרבות',
     subtitle: 'הכל על מסגרות חינוכיות ותרבותיות בשכונת אריאל שרון',
-    addCourse: 'הוסף קורס/סדנה',
-    addOpportunity: 'הוספת הזדמנות חינוכית',
+    addCourse: 'הוספת מודעה חדשה',
+    addOpportunity: 'הוספת מודעה חדשה',
     loadingCourses: 'טוען קורסים...',
-    noCourses: 'אין קורסים זמינים עדיין.',
-    beFirstCourse: 'היה הראשון להוסיף קורס או סדנה!',
+    noCourses: 'טרם פורסמו מודעות.',
+    beFirstCourse: '!',
     availableCourses: 'כל אירועי התרבות והספורט בשכונה',
     level: {
       label: 'רמה',
@@ -155,7 +155,7 @@ const he = {
       description: 'תיאור'
     },
     buttons: {
-      add: 'הוסף קורס',
+      add: 'הוספה',
       cancel: 'ביטול'
     }
   },
@@ -206,6 +206,7 @@ const he = {
     },
     labels: {
       phone: 'טלפון',
+      description: 'תיאור',
       email: 'דואר אלקטרוני',
       address: 'כתובת',
       category: 'קטגוריה',
@@ -229,6 +230,7 @@ const he = {
     condition: 'מצב',
     seller: 'מוכר',
     contact: 'יצירת קשר',
+    contactDetails: 'שם, טלפון',
     location: 'מיקום',
     date: 'תאריך',
     time: 'שעה',

@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import FloatingActionButton from '../../components/ui/FloatingActionButton';
 import PageLayout from '../../components/layout/PageLayout';
 import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
+import editIcon from '../../assets/icons/action-icons/edit.svg';
+import trashIcon from '../../assets/icons/action-icons/trash.svg';
 import { useI18n } from '../../i18n';
 import { storage } from '../../services/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../../context/AuthContext';
 
 const LostAndFoundPage = () => {
-  const { items, loading, addItem, error, refresh } = useData('lost-and-found');
-  const { ensureAuthenticated } = useAuth() || {};
+  const { items, loading, addItem, updateItem, deleteItem, error, refresh } = useData('lost-and-found');
+  const { ensureAuthenticated, user } = useAuth() || {};
   const [showForm, setShowForm] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [formData, setFormData] = useState({ description: '', contact: '' });
+  const [editingId, setEditingId] = useState(null);
   const { t } = useI18n();
 
   const handleSubmit = async (e) => {
@@ -46,8 +50,13 @@ const LostAndFoundPage = () => {
         }
       }
 
-  await addItem(dataToSave);
-  setFormData({ description: '', contact: '' });
+      if (editingId) {
+        await updateItem(editingId, dataToSave);
+      } else {
+        await addItem(dataToSave);
+      }
+      setFormData({ description: '', contact: '' });
+      setEditingId(null);
   setSelectedFile(null);
       setPreviewUrl(null);
       setShowForm(false);
@@ -76,11 +85,15 @@ const LostAndFoundPage = () => {
     }
   };
 
-  const handleOpenForm = async () => {
+  const handleOpenForm = async (itemToEdit = null) => {
     try {
       const useFirebase = process.env.REACT_APP_USE_FIREBASE === 'true';
       if (useFirebase && ensureAuthenticated) {
         await ensureAuthenticated();
+      }
+      if (itemToEdit) {
+        setEditingId(itemToEdit.id);
+        setFormData({ description: itemToEdit.description || '', contact: itemToEdit.contact || '' });
       }
       setShowForm(true);
     } catch (e) {
@@ -88,45 +101,75 @@ const LostAndFoundPage = () => {
     }
   };
 
+  // Close on ESC key
+  const handleEsc = useCallback((e) => {
+    if (e.key === 'Escape' && showForm) {
+      setShowForm(false);
+    }
+  }, [showForm]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [handleEsc]);
+
+  // Prevent scroll when modal open
+  useEffect(() => {
+    if (showForm) {
+      const original = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = original; };
+    }
+  }, [showForm]);
+
+  const renderForm = () => (
+    <Card className="mb-0" style={{ maxWidth: 680 }}>
+      <CardHeader>
+        <CardTitle>{t('lostAndFound.report')}</CardTitle>
+      </CardHeader>
+      <CardBody>
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="form-group">
+              <label className="form-label">{t('labels.contact')}</label>
+              <input className="form-input" name="contact" placeholder={t('labels.contactDetails')} value={formData.contact} onChange={handleInputChange} required />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">{t('labels.description')}</label>
+              <textarea className="form-input form-textarea" name="description" placeholder={t('labels.description')} value={formData.description} onChange={handleInputChange} required />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">הוספת תמונה (לא חובה)</label>
+              <input type="file" accept="image/*" onChange={handleFileChange} className="form-input" />
+              {previewUrl && <img src={previewUrl} alt="preview" style={{ maxWidth: 120, marginTop: 8 }} />}
+            </div>
+          </div>
+
+          <div className="form-actions">
+            <Button type="submit">הוספת דיווח</Button>
+            
+          </div>
+        </form>
+      </CardBody>
+    </Card>
+  );
+
   return (
     <PageLayout title={t('lostAndFound.title')}>
       <div className="fade-in">
         {showForm && (
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>{t('lostAndFound.report')}</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.contact')}</label>
-                    <input className="form-input" name="contact" value={formData.contact} onChange={handleInputChange} required />
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label">{t('labels.description')}</label>
-                    <textarea className="form-input form-textarea" name="description" value={formData.description} onChange={handleInputChange} required />
-                  </div>
-
-                  
-
-                  <div className="form-group">
-                    <label className="form-label">Image (optional)</label>
-                    <input type="file" accept="image/*" onChange={handleFileChange} className="form-input" />
-                    {previewUrl && <img src={previewUrl} alt="preview" style={{ maxWidth: 120, marginTop: 8 }} />}
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button type="submit">{t('common.submit')}</Button>
-                  <Button type="button" variant="secondary" onClick={() => setShowForm(false)}>
-                    {t('common.cancel')}
-                  </Button>
-                </div>
-              </form>
-            </CardBody>
-          </Card>
+          <div className="modal-backdrop" onMouseDown={(e) => {
+            // close if clicking backdrop (not the card itself)
+            if (e.target.classList.contains('modal-backdrop')) {
+              setShowForm(false);
+            }
+          }}>
+            <div className="modal-container fade-in-up">
+              {renderForm()}
+            </div>
+          </div>
         )}
 
         <div>
@@ -140,7 +183,7 @@ const LostAndFoundPage = () => {
               </CardBody>
             </Card>
           )}
-          <h3 className="text-2xl font-semibold mb-6">{t('lostAndFound.recentReports')}</h3>
+          <h3 className="text-xl font-semibold mb-6">{t('lostAndFound.recentReports')}</h3>
 
           {loading ? (
             <div className="text-center py-8">
@@ -155,7 +198,7 @@ const LostAndFoundPage = () => {
               </CardBody>
             </Card>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-4">
               {items.map((item) => (
                 <Card key={item.id}>
                   
@@ -165,20 +208,27 @@ const LostAndFoundPage = () => {
                       <p><strong>{t('labels.contact')}:</strong> {item.contact}</p>
                       
                     </div>
+                    {user && item.createdBy === user.uid && (
+                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                        <button type="button" aria-label={t('common.edit')} onClick={() => handleOpenForm(item)} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
+                          <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
+                        </button>
+                        <button type="button" aria-label={t('common.delete')} onClick={async () => { try { await deleteItem(item.id); } catch (err) { console.error('Delete failed', err); } }} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
+                          <img src={trashIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
+                        </button>
+                      </div>
+                    )}
                   </CardBody>
                 </Card>
               ))}
             </div>
           )}
           {!showForm && (
-            <div className="flex justify-center mt-8">
-              <Button 
-                onClick={handleOpenForm}
-                className="w-full md:w-auto"
-              >
-                {t('lostAndFound.report')}
-              </Button>
-            </div>
+            <FloatingActionButton
+              onClick={handleOpenForm}
+              label={t('common.add')}
+              ariaLabel={t('lostAndFound.report')}
+            />
           )}
         </div>
       </div>

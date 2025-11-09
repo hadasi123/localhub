@@ -27,6 +27,17 @@ class DataService {
     this.initializeData();
   }
 
+  // Generate or retrieve a persistent local user id for ownership tagging
+  getLocalUserId() {
+    const KEY = 'localhub_user_id';
+    let uid = localStorage.getItem(KEY);
+    if (!uid) {
+      uid = Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(KEY, uid);
+    }
+    return uid;
+  }
+
   // Initialize with sample data if storage is empty
   initializeData() {
     Object.values(STORAGE_KEYS).forEach(key => {
@@ -62,7 +73,9 @@ class DataService {
       const items = await this.getAllItems(type);
       const newItem = this.createItemByType(type, {
         ...itemData,
-        id: this.generateId()
+        id: this.generateId(),
+        createdBy: this.getLocalUserId(),
+        createdAt: new Date().toISOString()
       });
       items.push(newItem);
       await this.saveItems(type, items);

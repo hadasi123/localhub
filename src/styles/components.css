@@ -190,6 +190,7 @@
 .page {
   min-height: calc(100vh - 80px);
   padding: var(--spacing-xl) 0;
+  position: relative; /* ensure child absolute elements position predictably */
 }
 
 .page-header {
@@ -225,6 +226,7 @@
   align-items: center;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-md);
+  position: relative; /* Anchor absolute edit/delete icons */
 }
 
 .content-card-icon {
@@ -242,12 +244,13 @@
 .content-card-body {
   color: var(--grey-700);
   line-height: 1;
+  position: relative; /* For absolute positioned action buttons if placed inside body */
 }
 
 /* Form Elements */
 .form-group {
   /* Space between form items (label+input blocks) */
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 .form-label {
@@ -274,8 +277,15 @@
 }
 
 .form-textarea {
-  min-height: 100px;
+  min-height: 80px;
   resize: vertical;
+}
+
+/* Form actions (submit/cancel row) */
+.form-actions {
+  display: flex;
+  justify-content: end;
+  margin-top: var(--spacing-xl);
 }
 
 /* Status Messages */
@@ -439,6 +449,84 @@
   display: flex;
   flex-direction: column;
   padding: var(--spacing-lg);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--spacing-lg);
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Simple entrance animation */
+.fade-in-up {
+  animation: fadeInUp 180ms ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating Action Button (Add Item) */
+.fab-add {
+  position: fixed;
+  left: var(--spacing-lg);
+  bottom: var(--spacing-lg);
+  z-index: 1500;
+  box-shadow: var(--shadow-xl);
+  border-radius: 999px;
+  padding: 0 var(--spacing-xl);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  will-change: transform;
+  transform: translateZ(0); /* Promote to its own layer to avoid initial jump */
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.fab-add svg, .fab-add img {
+  width: 20px;
+  height: 20px;
+}
+
+.fab-add:hover {
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Prevent layout shift on first paint by reserving space for inline-flex height */
+.fab-add::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .fab-add {
+    left: var(--spacing-md);
+    bottom: var(--spacing-md);
+    padding: 0 var(--spacing-lg);
+  }
 }
 
 .news-header {

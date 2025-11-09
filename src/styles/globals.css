@@ -179,6 +179,7 @@ a:hover {
 
 .card-body {
   padding: 0;
+  position: relative; /* anchor absolute action icons when used inside body */
 }
 
 .card:hover {
@@ -189,6 +190,7 @@ a:hover {
   border-bottom: 1px solid var(--grey-200);
   padding-bottom: var(--spacing-md);
   margin-bottom: var(--spacing-md);
+  position: relative; /* anchor absolute action icons inside header */
 }
 
 .card-title {

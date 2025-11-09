@@ -12,6 +12,16 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>LocalHub</title>
+    <!-- Critical CSS: match final spacing (1.5rem) to eliminate position jump when full stylesheet loads -->
+    <style>
+      .fab-add {
+        position: fixed !important;
+        left: 1.5rem;
+        bottom: 1.5rem;
+        z-index: 1500;
+      }
+      .fab-add img { width: 20px; height: 20px; margin-inline-start: 8px; vertical-align: middle; }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -105,7 +105,9 @@ const firebaseAdapter = {
 
   async deleteItem(type, id) {
     try {
-      await deleteDoc(doc(db, collectionNameForType(type), id));
+      const docRef = doc(db, collectionNameForType(type), id);
+      // (Optional) Could check ownership here by fetching doc; omitting for performance assuming rules enforce
+      await deleteDoc(docRef);
       return true;
     } catch (err) {
       console.error('Firestore deleteItem error:', err);
