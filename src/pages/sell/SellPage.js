@@ -229,6 +229,7 @@ const SellPage = () => {
                 <Card key={item.id}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
+                      
                       <div className="text-right">
                         {item.category !== 'giveaway' && (
                           <div className="text-xl font-bold text-primary">₪{item.price}</div>
@@ -238,13 +239,22 @@ const SellPage = () => {
                             {t('sell.fields.condition')}: {t(`sell.conditions.${item.condition}`)}
                           </div>
                         )}
+                        
                       </div>
                     </div>
                     <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
                       {t(`sell.category.${item.category}`)}
                     </span>
+                    
+                  </CardHeader>
+                  <CardBody>
+                    <p className="text-grey-600 mb-3">{item.description}</p>
+                    <div className="space-y-1 text-sm text-grey-500">
+                      <p><strong>{t('sell.fields.contact')}:</strong> {item.contact}</p>
+                      <p><strong>{t('sell.fields.listed')}:</strong> {new Date(item.date).toLocaleDateString()}</p>
+                    </div>
                     {user && item.createdBy === user.uid && (
-                      <div className="flex items-center gap-2" style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}>
+                      <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>
                         <button type="button" aria-label={t('common.edit') || 'Edit'} onClick={() => handleOpenForm(item)} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
                           <img src={editIcon} alt="" style={{ width: 20, height: 20 }} aria-hidden="true" />
                         </button>
@@ -253,14 +263,6 @@ const SellPage = () => {
                         </button>
                       </div>
                     )}
-                  </CardHeader>
-                  <CardBody>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
-                    <div className="space-y-1 text-sm text-grey-500">
-                      <p><strong>{t('sell.fields.contact')}:</strong> {item.contact}</p>
-                      <p><strong>{t('sell.fields.listed')}:</strong> {new Date(item.date).toLocaleDateString()}</p>
-                
-                    </div>
                   </CardBody>
                 </Card>
               ))}
