@@ -10,6 +10,7 @@ import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
 import { useAuth } from '../../context/AuthContext';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 
 const BusinessPage = () => {
   const { items, loading, addItem, updateItem, deleteItem } = useData('business');
@@ -211,10 +212,10 @@ const BusinessPage = () => {
                     
                   </CardHeader>
                   <CardBody>
-                    <p className="text-grey-600 mb-3" style={{marginTop:8}}>{item.description}</p>
+                    <p className="text-grey-600 mb-3" style={{marginTop:8}}><TextWithPhoneLinks text={item.description} /></p>
                     <div className="space-y-1 text-sm text-grey-500">
                       {item.address && <p><strong>{t('business.fields.address')}:</strong> {item.address}</p>}
-                      {item.phone && <p><strong>{t('business.fields.phone')}:</strong> {item.phone}</p>}
+                      {item.phone && <p><strong>{t('business.fields.phone')}:</strong> <TextWithPhoneLinks text={item.phone} /></p>}
                       {item.website && <p><strong>{t('business.fields.website')}:</strong> <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.website}</a></p>}
                       
                     </div>

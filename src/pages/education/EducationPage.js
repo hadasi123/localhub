@@ -10,6 +10,7 @@ import Button from '../../components/ui/Button';
 import { useData } from '../../hooks/useData';
 import { useI18n } from '../../i18n';
 import { useAuth } from '../../context/AuthContext';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 
 const EducationPage = () => {
   const { items, loading, addItem, updateItem, deleteItem } = useData('education');
@@ -187,9 +188,9 @@ const EducationPage = () => {
                     
                   </CardHeader>
                   <CardBody style={{marginTop: 8}}>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
+                    <p className="text-grey-600 mb-3"><TextWithPhoneLinks text={item.description} /></p>
                     <div className="space-y-1 text-sm text-grey-500">
-                      <p><strong>{t('education.form.contact')}:</strong> {item.contact}</p>
+                      <p><strong>{t('education.form.contact')}:</strong> <TextWithPhoneLinks text={item.contact} /></p>
                     </div>
                     {user && item.createdBy === user.uid && (
                       <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 import FloatingActionButton from '../../components/ui/FloatingActionButton';
 import PageLayout from '../../components/layout/PageLayout';
 import { Card, CardHeader, CardTitle, CardBody } from '../../components/ui/Card';
@@ -16,7 +17,6 @@ const LostAndFoundPage = () => {
   const { ensureAuthenticated, user } = useAuth() || {};
   const [showForm, setShowForm] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
   const [formData, setFormData] = useState({ description: '', contact: '' });
   const [editingId, setEditingId] = useState(null);
   const { t } = useI18n();
@@ -55,10 +55,9 @@ const LostAndFoundPage = () => {
       } else {
         await addItem(dataToSave);
       }
-      setFormData({ description: '', contact: '' });
-      setEditingId(null);
-  setSelectedFile(null);
-      setPreviewUrl(null);
+    setFormData({ description: '', contact: '' });
+    setEditingId(null);
+    setSelectedFile(null);
       setShowForm(false);
     } catch (err) {
       console.error('Error adding item:', err);
@@ -70,20 +69,7 @@ const LostAndFoundPage = () => {
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      try {
-        setPreviewUrl(URL.createObjectURL(file));
-      } catch (err) {
-        setPreviewUrl(null);
-      }
-    } else {
-      setSelectedFile(null);
-      setPreviewUrl(null);
-    }
-  };
+  // No file input in the current form; file change handler omitted.
 
   const handleOpenForm = async (itemToEdit = null) => {
     try {
@@ -197,9 +183,9 @@ const LostAndFoundPage = () => {
                 <Card key={item.id}>
                   
                   <CardBody>
-                    <p className="text-grey-600 mb-3">{item.description}</p>
+                    <p className="text-grey-600 mb-3"><TextWithPhoneLinks text={item.description} /></p>
                     <div className="text-sm text-grey-500 space-y-1">
-                      <p><strong>{t('labels.contact')}:</strong> {item.contact}</p>
+                      <p><strong>{t('labels.contact')}:</strong> <TextWithPhoneLinks text={item.contact} /></p>
                       
                     </div>
                     {user && item.createdBy === user.uid && (

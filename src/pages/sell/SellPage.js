@@ -10,6 +10,7 @@ import editIcon from '../../assets/icons/action-icons/edit.svg';
 import trashIcon from '../../assets/icons/action-icons/trash.svg';
 import { useI18n } from '../../i18n';
 import { useAuth } from '../../context/AuthContext';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 
 const SellPage = () => {
   const { items, loading, addItem, updateItem, deleteItem } = useData('sell');
@@ -258,7 +259,7 @@ const SellPage = () => {
                       <span className="text-xs" style={getCategoryBadgeStyle(item.category)}>
                         {t(`sell.category.${item.category}`)}
                       </span>
-                      <span className="text-xs">{item.description}</span>
+                      <span className="text-xs"><TextWithPhoneLinks text={item.description} /></span>
                     </div>
                   </CardHeader>
                   <CardBody>
@@ -270,7 +271,7 @@ const SellPage = () => {
                       {item.category !== 'giveaway' &&  (
                         <p><strong>{t('sell.fields.price')}:</strong> ₪{item.price}</p>
                       )}
-                      <p><strong>{t('sell.fields.contact')}:</strong> {item.contact}</p>
+                      <p><strong>{t('sell.fields.contact')}:</strong> <TextWithPhoneLinks text={item.contact} /></p>
                       <p><strong>{t('sell.fields.listed')}:</strong> {new Date(item.date).toLocaleDateString()}</p>
                     </div>
                     {user && item.createdBy === user.uid && (

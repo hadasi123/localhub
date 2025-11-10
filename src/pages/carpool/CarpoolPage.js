@@ -10,6 +10,7 @@ import editIcon from '../../assets/icons/action-icons/edit.svg';
 import trashIcon from '../../assets/icons/action-icons/trash.svg';
 import { useI18n } from '../../i18n';
 import { useAuth } from '../../context/AuthContext';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 
 const CarpoolPage = () => {
   const { items, loading, addItem, updateItem, deleteItem } = useData('carpool');
@@ -211,8 +212,8 @@ const CarpoolPage = () => {
                       <p><strong>{t('carpool.to')}:</strong> {item.to}</p>
                       <p><strong>{t('carpool.date')}:</strong> {new Date(item.date).toLocaleDateString('he-IL')}</p>
                       <p><strong>{t('carpool.time')}:</strong> {item.time}</p>
-                      {item.description && <p><strong>{t('carpool.description')}:</strong> {item.description}</p>}
-                      <p><strong>{t('carpool.contact')}:</strong> {item.contact}</p>
+                      {item.description && <p><strong>{t('carpool.description')}:</strong> <TextWithPhoneLinks text={item.description} /></p>}
+                      <p><strong>{t('carpool.contact')}:</strong> <TextWithPhoneLinks text={item.contact} /></p>
                     </div>
                     {user && item.createdBy === user.uid && (
                       <div className="flex" style={{  flexDirection: 'row', alignSelf:'flex-end',gap:16, justifyContent: 'flex-end' }}>

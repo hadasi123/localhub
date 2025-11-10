@@ -10,6 +10,7 @@ import editIcon from '../../assets/icons/action-icons/edit.svg';
 import trashIcon from '../../assets/icons/action-icons/trash.svg';
 import { useI18n } from '../../i18n';
 import { useAuth } from '../../context/AuthContext';
+import TextWithPhoneLinks from '../../components/ui/TextWithPhoneLinks';
 
 const PhoneBookPage = () => {
   const { items, loading, addItem, updateItem, deleteItem } = useData('phone-book');
@@ -181,7 +182,7 @@ const PhoneBookPage = () => {
                     <div className="text-sm text-grey-500" style={{ marginTop: 8 }}>
                       <p><strong>{t('phoneBook.labels.phone')}:</strong> <a href={`tel:${item.phone}`} className="text-primary hover:underline">{item.phone}</a></p>
                       {item.description && (
-                        <p><strong>{t('phoneBook.labels.description')}:</strong> <span className="text-grey-600">{item.description}</span></p>
+                        <p><strong>{t('phoneBook.labels.description')}:</strong> <span className="text-grey-600"><TextWithPhoneLinks text={item.description} /></span></p>
                       )}
                     </div>
                     {user && item.createdBy === user.uid && (
