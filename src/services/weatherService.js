@@ -28,8 +28,8 @@ class WeatherService {
     this.cacheExpiry = 10 * 60 * 1000; // 10 minutes
     this.apiUrl = 'https://api.open-meteo.com/v1/forecast';
     this.israelCoordinates = {
-      latitude: 34.84,
-      longitude: 32.06
+      latitude: 32.0729229,
+      longitude: 34.8329012
     };
 }
 
@@ -165,7 +165,7 @@ class WeatherService {
 }
 
 // Air Pollution API (Open-Meteo)
-WeatherService.prototype.getAirPollution = async function(lat = 32.060809, lon = 34.839409) {
+WeatherService.prototype.getAirPollution = async function(lat = 32.0729229, lon = 34.8329012) {
   const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone,sulphur_dioxide&timezone=Asia/Jerusalem`;
   try {
     const response = await fetch(url);

@@ -33,14 +33,7 @@ const subjectsConfig = (t) => ([
     link: t('infoCenter.subjects.recycle.link'),
     linkLabel: t('infoCenter.subjects.recycle.linkLabel'),
   },
-  {
-    key: 'municipalSchedual',
-    icon: municipalSchedualIcon,
-    title: t('infoCenter.subjects.municipalSchedual.title'),
-    text: t('infoCenter.subjects.municipalSchedual.text'),
-    link: t('infoCenter.subjects.municipalSchedual.link'),
-    linkLabel: t('infoCenter.subjects.municipalSchedual.linkLabel'),
-  },
+
   {
     key: 'kindergartens',
     icon: kindergartensIcon,
@@ -124,7 +117,8 @@ const InfoCenterPage = () => {
                   fontSize: 'var(--font-size-sm)',
                   lineHeight: 1.6,
                   color: 'var(--grey-700)',
-                  fontWeight: 400
+                  fontWeight: 400,
+                  whiteSpace: 'pre-wrap'
                 }}>{s.text}</p>
                 {s.link && (
                   <p style={{ marginTop: 12, fontSize: 'var(--font-size-sm)' }}>
